@@ -1,15 +1,12 @@
 package sample;
 
-import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -34,7 +31,7 @@ public class ConfigScreenController {
     private int height;
     private int width;
 
-    public ConfigScreenController(){}
+    public ConfigScreenController() { }
 
     public ConfigScreenController(int width, int height) throws IOException {
         this.width = width;
@@ -49,20 +46,36 @@ public class ConfigScreenController {
         this.begin = (Button) scene.lookup("#begin");
     }
 
-    public Scene getScene() throws Exception { return this.scene; }
+    public Scene getScene() throws Exception {
+        return this.scene;
+    }
 
-    public TextField getFarmerName() { return this.farmerName; }
+    public TextField getFarmerName() {
+        return this.farmerName;
+    }
 
-    public Slider getDifficultySlider() { return this.difficultySlider; }
+    public Slider getDifficultySlider() {
+        return this.difficultySlider;
+    }
 
-    public Text getDifficulty() { return this.difficulty; }
+    public Text getDifficulty() {
+        return this.difficulty;
+    }
 
-    public Button getLongSwordButton() { return this.longSwordButton; }
+    public Button getLongSwordButton() {
+        return this.longSwordButton;
+    }
 
-    public Button getMaceButton() { return this.maceButton; }
+    public Button getMaceButton() {
+        return this.maceButton;
+    }
 
-    public Button getDaggerButton() { return this.daggerButton; }
+    public Button getDaggerButton() {
+        return this.daggerButton;
+    }
 
-    public Button getBegin() { return this.begin; }
+    public Button getBegin() {
+        return this.begin;
+    }
 
 }

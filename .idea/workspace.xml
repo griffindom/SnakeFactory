@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87341eb1-401f-4952-9e66-7f8cc33c574f" name="Default Changelist" comment="" />
+    <list default="true" id="87341eb1-401f-4952-9e66-7f8cc33c574f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/ConfigScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/ConfigScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/InitialGameScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/InitialGameScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/initialGameScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/initialGameScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/welcomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/welcomeScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeFactory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeFactory.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +31,32 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.Main" />
+      <module name="SnakeFactory" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -32,10 +67,25 @@
       <option name="presentableId" value="Default" />
       <updated>1614219086027</updated>
       <workItem from="1614219096952" duration="20000" />
+      <workItem from="1614313839860" duration="54000" />
+      <workItem from="1614313960406" duration="4029000" />
+      <workItem from="1614318248211" duration="1044000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
