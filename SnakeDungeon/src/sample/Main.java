@@ -18,14 +18,15 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         mainWindow = primaryStage;
         mainWindow.setTitle("Snake Dungeon");
         initWelcomeScreen();
     }
 
     private void initWelcomeScreen() throws Exception {
-        WelcomeScreenController welcomeScreenController = new WelcomeScreenController(width, height);
+        WelcomeScreenController welcomeScreenController =
+                new WelcomeScreenController(width, height);
         Scene scene = welcomeScreenController.getScene();
         Button startButton = welcomeScreenController.getStartButton();
         startButton.setOnAction(e -> {
@@ -46,6 +47,7 @@ public class Main extends Application {
         TextField farmerName = (TextField) scene.lookup("#farmerName");
         Slider difficultySlider = (Slider) scene.lookup("#difficultySlider");
         Text difficulty = (Text) scene.lookup("#difficulty");
+        difficulty.setText("Choose difficulty");
         Button longSwordButton = (Button) scene.lookup("#longSwordButton");
         Button maceButton = (Button) scene.lookup("#maceButton");
         Button daggerButton = (Button) scene.lookup("#daggerButton");
@@ -56,29 +58,21 @@ public class Main extends Application {
         maceButton.setOnAction(e -> weaponSelected.set("Mace"));
         daggerButton.setOnAction(e -> weaponSelected.set("Dagger"));
 
-        // TODO: implement difficulty slider to display proper difficulty
         // will need to change difficulty text to change as slider does
         // utilize slider helper to get text equivalent to slider double value
-        /*difficultySlider.valueProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue<?extends Number> observable, Number oldValue, Number newValue){
-                difficulty.setText(difficultySliderHelper((double) newValue / 25));
-            }
-        });*/
 
         begin.setOnAction(e -> {
             String name = farmerName.getText();
             String diff = difficultySliderHelper(difficultySlider.getValue());
-            int startingGold = 500 - (int) difficultySlider.getValue();
-            // TODO: add to make sure there is more than just spaces in the name field
-            // checks to see if name is null, name is empty, weapon is selected
-            if (name != null && !name.isEmpty() && !weaponSelected.get().isEmpty()) {
+            int startingGold = 420 - (int) difficultySlider.getValue();
+            if (checkNameHelper(name, weaponSelected)) {
                 gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold);
                 System.out.println(gameModel.toString());
-                //try {
-                //    goToInitialGameScreen();
-                //} catch (Exception exception) {
-                //    exception.printStackTrace();
-                //}
+                try {
+                    goToInitialGameScreen();
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
             }
         });
 
@@ -87,10 +81,12 @@ public class Main extends Application {
     }
 
     private void goToInitialGameScreen() throws Exception {
-        ConfigScreenController configScreenController = new ConfigScreenController(width, height);
-        Scene scene = configScreenController.getScene();
+        InitialGameScreenController initialGameScreenController =
+                new InitialGameScreenController(width, height);
+        Scene scene = initialGameScreenController.getScene();
 
-        //TODO: Add handlers for initial game screen
+        Text gold = (Text) scene.lookup("#enterGold");
+        gold.setText(gameModel.getTotalGold() + " Gold Coins");
 
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -100,24 +96,39 @@ public class Main extends Application {
         int test = (int) value / 25;
         String temp = null;
         switch (test) {
-            case 0:
-                temp = "Easy";
-                break;
-            case 1:
-                temp = "Normal";
-                break;
-            case 2:
-                temp = "Hard";
-                break;
-            case 3:
-                temp = "Legendary";
-                break;
-            case 4:
-                temp = "X-Games";
-                break;
+        case 0:
+            temp = "Easy";
+            break;
+        case 1:
+            temp = "Normal";
+            break;
+        case 2:
+            temp = "Hard";
+            break;
+        case 3:
+            temp = "Legendary";
+            break;
+        case 4:
+            temp = "X-Games";
+            break;
+        default:
+            temp = "Easy";
         }
         return temp;
     }
 
-    public static void main(String[] args) { launch(args); }
+    private boolean checkNameHelper(String name, AtomicReference<String> weaponSelected) {
+        int spaces = 0;
+        for (int i = 0; i < name.length(); i++) {
+            if (name.charAt(i) == ' ') {
+                spaces++;
+            }
+        }
+        return spaces != name.length() && name != null
+                && !name.isEmpty() && !weaponSelected.get().isEmpty();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
