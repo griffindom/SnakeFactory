@@ -18,6 +18,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="org.testfx:testfx-core:4.0.15-alpha" level="project" />
-    <orderEntry type="library" name="org.testfx:testfx-junit5:4.0.15-alpha" level="project" />
+    <orderEntry type="library" name="junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="org.testfx:testfx-junit:4.0.15-alpha" level="project" />
   </component>
 </module>
