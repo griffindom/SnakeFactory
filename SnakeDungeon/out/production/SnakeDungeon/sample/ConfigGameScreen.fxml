@@ -55,7 +55,7 @@
                   <AnchorPane prefHeight="141.0" prefWidth="700.0">
                      <children>
                         <Slider fx:id="difficultySlider" blockIncrement="25.0" layoutX="100.0" layoutY="34.0" minorTickCount="0" prefHeight="25.0" prefWidth="500.0" showTickMarks="true" snapToTicks="true" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="34.0" />
-                        <Text fx:id="difficulty" layoutX="324.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Text fx:id="difficulty" layoutX="324.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose difficulty" />
                      </children>
                   </AnchorPane>
                   <HBox prefHeight="131.0" prefWidth="700.0">

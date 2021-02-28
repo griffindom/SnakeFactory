@@ -24,11 +24,12 @@ public class Main extends Application {
         initWelcomeScreen();
     }
 
-    private void initWelcomeScreen() throws Exception {
+    public void initWelcomeScreen() throws Exception {
+        System.out.println("Welcome");
         WelcomeScreenController welcomeScreenController =
                 new WelcomeScreenController(width, height);
         Scene scene = welcomeScreenController.getScene();
-        Button startButton = welcomeScreenController.getStartButton();
+        Button startButton = (Button) scene.lookup("#startButton");
         startButton.setOnAction(e -> {
             try {
                 goToConfigScreen();
@@ -46,8 +47,8 @@ public class Main extends Application {
         Scene scene = configScreenController.getScene();
         TextField farmerName = (TextField) scene.lookup("#farmerName");
         Slider difficultySlider = (Slider) scene.lookup("#difficultySlider");
-        Text difficulty = (Text) scene.lookup("#difficulty");
-        difficulty.setText("Choose difficulty");
+        //Text difficulty = (Text) scene.lookup("#difficulty");
+        //difficulty.setText("Choose difficulty");
         Button longSwordButton = (Button) scene.lookup("#longSwordButton");
         Button maceButton = (Button) scene.lookup("#maceButton");
         Button daggerButton = (Button) scene.lookup("#daggerButton");
