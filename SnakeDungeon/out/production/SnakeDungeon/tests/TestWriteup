@@ -8,7 +8,9 @@ The emptyNameNotAllowed() test verifies that the user enters a non-empty name by
 The testBegin() test verifies that the begin button works. First, the start button is clicked, then a valid name is entered, a weapon is chosen, then the begin button is clicked. If the difficulty slider is gone, then the begin button works.
 
 
-William McLanahan:
+William McLanahan: Created a test to make sure that the Begin button would be present on the configuration screen
+upon clicking the Start button. This ensures that the player will be able to continue to the game
+once they are ready to do so. I also created a test that made sure the gold counter is correct after the first difficulty slider.
 
 
 
