@@ -43,7 +43,6 @@ public class MainTest extends ApplicationTest {
         FxAssert.verifyThat("#daggerButton", LabeledMatchers.hasText("Dagger"));
     }
 
-    
     @Test
     public void emptyNameNotAllowed() {
         clickOn("#startButton");
