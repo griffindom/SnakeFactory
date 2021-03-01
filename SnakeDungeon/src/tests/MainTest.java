@@ -2,8 +2,10 @@ package tests;
 
 import javafx.stage.Stage;
 import org.junit.Test;
+import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 import sample.Main;
 
 import static org.testfx.api.FxAssert.verifyThat;
@@ -25,5 +27,17 @@ public class MainTest extends ApplicationTest {
     public void testStart() {
         clickOn("#startButton");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+    }
+    @Test
+    public void testMaceButton() {
+        clickOn("#startButton");
+        clickOn("#maceButton");
+        FxAssert.verifyThat("#maceButton", LabeledMatchers.hasText("Mace"));
+    }
+    @Test
+    public void testDaggerButton() {
+        clickOn("#startButton");
+        clickOn("#daggerButton");
+        FxAssert.verifyThat("#daggerButton", LabeledMatchers.hasText("Dagger"));
     }
 }
