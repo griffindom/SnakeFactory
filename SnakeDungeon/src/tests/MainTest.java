@@ -28,17 +28,20 @@ public class MainTest extends ApplicationTest {
         clickOn("#startButton");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
+    
     @Test
     public void testMaceButton() {
         clickOn("#startButton");
         clickOn("#maceButton");
         FxAssert.verifyThat("#maceButton", LabeledMatchers.hasText("Mace"));
     }
+    
     @Test
     public void testDaggerButton() {
         clickOn("#startButton");
         clickOn("#daggerButton");
         FxAssert.verifyThat("#daggerButton", LabeledMatchers.hasText("Dagger"));
+    }
 
     
     @Test
@@ -50,7 +53,7 @@ public class MainTest extends ApplicationTest {
     }
     
     @Test
-    public void testBegin(){
+    public void testBegin() {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Not empty");
