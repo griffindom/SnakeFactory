@@ -3,7 +3,9 @@ Griffin Dominguez:
 
 
 Sydney Hahn:
-
+I created 2 tests to verify that the user enters all the information needed to begin the game.
+The emptyNameNotAllowed() test verifies that the user enters a non-empty name by first clicking on the start button, choosing a weapon, then clicking begin. If the begin button works, then the choose difficulty slider will be gone and the name entered should be valid.
+The testBegin() test verifies that the begin button works. First, the start button is clicked, then a valid name is entered, a weapon is chosen, then the begin button is clicked. If the difficulty slider is gone, then the begin button works.
 
 
 William McLanahan:
