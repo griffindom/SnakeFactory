@@ -26,4 +26,21 @@ public class MainTest extends ApplicationTest {
         clickOn("#startButton");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
+    
+    @Test
+    public void emptyNameNotAllowed() {
+        clickOn("#startButton");
+        clickOn("#longSwordButton");
+        clickOn("#begin);
+        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+    }
+    
+    @Test
+    public void testBegin() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        sendKeys("Not empty");
+        clickOn("#begin);
+        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+    }
 }
