@@ -57,6 +57,6 @@ public class MainTest extends ApplicationTest {
         clickOn("#farmerName");
         write("Not empty");
         clickOn("#begin");
-        verifyThat("Choose difficulty", NodeMatchers.isNull());
+        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
 }
