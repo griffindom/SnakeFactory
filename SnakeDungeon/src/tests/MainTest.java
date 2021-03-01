@@ -31,7 +31,7 @@ public class MainTest extends ApplicationTest {
     public void emptyNameNotAllowed() {
         clickOn("#startButton");
         clickOn("#longSwordButton");
-        clickOn("#begin);
+        clickOn("#begin");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
     
@@ -39,7 +39,7 @@ public class MainTest extends ApplicationTest {
     public void testBegin() {
         clickOn("#startButton");
         clickOn("#farmerName");
-        sendKeys("Not empty");
+        write("Not empty");
         clickOn("#begin");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
