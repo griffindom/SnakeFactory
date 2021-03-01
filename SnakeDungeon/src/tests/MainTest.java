@@ -39,5 +39,22 @@ public class MainTest extends ApplicationTest {
         clickOn("#startButton");
         clickOn("#daggerButton");
         FxAssert.verifyThat("#daggerButton", LabeledMatchers.hasText("Dagger"));
+
+    
+    @Test
+    public void emptyNameNotAllowed() {
+        clickOn("#startButton");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+    }
+    
+    @Test
+    public void testBegin(){
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#begin");
+        verifyThat("Choose difficulty", NodeMatchers.isNull());
     }
 }
