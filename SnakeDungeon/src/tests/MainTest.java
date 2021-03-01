@@ -50,7 +50,7 @@ public class MainTest extends ApplicationTest {
         write("Not empty");
         clickOn("#longSwordButton");
         clickOn("#begin");
-        verifyThat("Choose difficulty", NodeMatchers.isNull());
+        verifyThat("500 Gold Coins", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -74,6 +74,6 @@ public class MainTest extends ApplicationTest {
         clickOn("#farmerName");
         write("Not empty");
         clickOn("#begin");
-        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+        verifyThat("Choose difficulty", NodeMatchers.isNull());
     }
 }
