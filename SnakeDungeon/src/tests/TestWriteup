@@ -17,5 +17,8 @@ James Sherman:
 
 
 Jasper Pilkenton:
+I created 2 tests. The first verifies that the longSwordButton is a functioning button - verifying that when clicking on the longSwordButton 
+the Long Sword is selected as the starting weapon. The second test verifies that the preliminary game settings have been clicked/selected properly
+so that the game can begin. 
 
 
