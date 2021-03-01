@@ -40,7 +40,7 @@ public class MainTest extends ApplicationTest {
         clickOn("#startButton");
         clickOn("#farmerName");
         sendKeys("Not empty");
-        clickOn("#begin);
+        clickOn("#begin");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
 }
