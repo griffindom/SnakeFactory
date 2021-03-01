@@ -28,29 +28,46 @@ public class MainTest extends ApplicationTest {
         clickOn("#startButton");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
-    
+
     @Test
     public void testMaceButton() {
         clickOn("#startButton");
         clickOn("#maceButton");
         FxAssert.verifyThat("#maceButton", LabeledMatchers.hasText("Mace"));
     }
-    
+
     @Test
     public void testDaggerButton() {
         clickOn("#startButton");
         clickOn("#daggerButton");
         FxAssert.verifyThat("#daggerButton", LabeledMatchers.hasText("Dagger"));
     }
-    
+
+    @Test
+    public void testNameValidity() {
+        clickOn("#startButton");
+        verifyThat("Begin", NodeMatchers.isNotNull());
+    }
+
     @Test
     public void testStartUp() {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Not empty");
+        clickOn("#difficultySlider");
         clickOn("#longSwordButton");
         clickOn("#begin");
-        verifyThat("Choose difficulty", NodeMatchers.isNull());
+        verifyThat("450 Gold Coins", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testStartUp2() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        verifyThat("500 Gold Coins", NodeMatchers.isNotNull());
     }
 
     @Test
@@ -67,7 +84,7 @@ public class MainTest extends ApplicationTest {
         clickOn("#begin");
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
-    
+
     @Test
     public void testBegin() {
         clickOn("#startButton");

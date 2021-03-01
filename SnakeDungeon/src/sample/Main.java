@@ -65,7 +65,7 @@ public class Main extends Application {
         begin.setOnAction(e -> {
             String name = farmerName.getText();
             String diff = difficultySliderHelper(difficultySlider.getValue());
-            int startingGold = 420 - (int) difficultySlider.getValue();
+            int startingGold = 500 - (int) difficultySlider.getValue();
             if (checkNameHelper(name, weaponSelected)) {
                 gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold);
                 System.out.println(gameModel.toString());
