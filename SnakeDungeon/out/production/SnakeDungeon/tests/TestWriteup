@@ -5,7 +5,7 @@ These tests are testWelcomeScreen() and testStart(), respectively.
 Sydney Hahn:
 I created 2 tests to verify that the user enters all the information needed to begin the game.
 The emptyNameNotAllowed() test verifies that the user enters a non-empty name by first clicking on the start button, choosing a weapon, then clicking begin. If the begin button works, then the choose difficulty slider will be gone and the name entered should be valid.
-The testBegin() test verifies that the begin button works. First, the start button is clicked, then a valid name is entered, a weapon is chosen, then the begin button is clicked. If the difficulty slider is gone, then the begin button works.
+The testBegin() test verifies that the begin button does not work if a weapon is not selected. First, the start button is clicked, then a valid name is entered, a weapon is not chosen, then the begin button is clicked. If the difficulty slider is still there, then the begin button did not work.
 
 
 William McLanahan: Created a test to make sure that the Begin button would be present on the configuration screen
@@ -15,6 +15,7 @@ once they are ready to do so. I also created a test that made sure the gold coun
 
 
 James Sherman:
+Created 2 tests. Both tests verify that the daggerButton and maceButton work properly.
 
 
 

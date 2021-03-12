@@ -9,7 +9,8 @@ public class LinkedNode<T> {
     private LinkedNode<T> fourth;
     private boolean isVisited;
 
-    LinkedNode(T data, LinkedNode<T> previous, LinkedNode<T> first, LinkedNode<T> second, LinkedNode<T> third, LinkedNode<T> fourth, boolean isVisited) {
+    LinkedNode(T data, LinkedNode<T> previous, LinkedNode<T> first, LinkedNode<T> second,
+               LinkedNode<T> third, LinkedNode<T> fourth, boolean isVisited) {
         this.data = data;
         this.previous = previous;
         this.first = first;
@@ -18,44 +19,63 @@ public class LinkedNode<T> {
         this.fourth = fourth;
         this.isVisited = isVisited;
     }
+
     LinkedNode(T data) {
         this(data, null, null, null, null, null, true);
     }
+
     T getData() {
         return data;
     }
+
     LinkedNode<T> getPrevious() {
         return previous;
     }
+
     LinkedNode<T> getFirst() {
         return first;
     }
+
     LinkedNode<T> getSecond() {
         return second;
     }
+
     LinkedNode<T> getThird() {
         return third;
     }
+
     LinkedNode<T> getFourth() {
         return fourth;
     }
-    boolean getIsVisited() {return isVisited;}
+
+    boolean getIsVisited() {
+        return isVisited;
+    }
+
     void setPrevious(LinkedNode<T> previous) {
         this.previous = previous;
     }
+
     void setFirst(LinkedNode<T> first) {
         this.first = first;
     }
+
     void setSecond(LinkedNode<T> second) {
         this.second = second;
     }
+
     void setThird(LinkedNode<T> third) {
         this.third = third;
     }
+
     void setFourth(LinkedNode<T> fourth) {
         this.fourth = fourth;
     }
-    void setIsVisited(boolean isVisited) {this.isVisited = isVisited;}
+
+    void setIsVisited(boolean isVisited) {
+        this.isVisited = isVisited;
+    }
+
     @Override
     public String toString() {
         return "Node containing " + data;

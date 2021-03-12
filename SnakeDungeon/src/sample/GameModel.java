@@ -6,6 +6,7 @@ public class GameModel {
     private String difficulty;
     private String startingWeapon;
     private int totalGold;
+    private DL4tree<RoomController> maze;
 
     public GameModel() {
 
@@ -16,6 +17,7 @@ public class GameModel {
         this.difficulty = difficulty;
         this.startingWeapon = startingWeapon;
         this.totalGold = totalGold;
+        this.maze = null;
     }
 
     public void setFarmerName(String farmerName) {
@@ -48,6 +50,16 @@ public class GameModel {
 
     public int getTotalGold() {
         return totalGold;
+    }
+
+    public DL4tree<RoomController> getMaze() {
+        return this.maze;
+    }
+
+    public DL4tree<RoomController> createMaze(RoomController initial) {
+        LinkedNode<RoomController> initialRoom = new LinkedNode<RoomController>(initial);
+        this.maze = new DL4tree<RoomController>(initialRoom, initialRoom);
+        return this.maze;
     }
 
     @Override
