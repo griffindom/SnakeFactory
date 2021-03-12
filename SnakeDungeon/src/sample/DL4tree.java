@@ -10,12 +10,13 @@ public class DL4tree<T> {
         this.tail = tail;
         this.size = size;
     }
-    DL4tree(LinkedNode<T> root, LinkedNode<T> tail) {
-        this(root, tail, 1);
+    DL4tree(LinkedNode<T> head, LinkedNode<T> tail) {
+        this(head, tail, 1);
     }
+
     public void addToFirst(T data) {
         if (data == null) {
-            throw new IllegalArgumentException("Cannot insert null data type into a data structure");
+            throw new IllegalArgumentException("NULL DATA");
         }
         LinkedNode<T> newNode = new LinkedNode<T>(data);
         newNode.setPrevious(tail);
@@ -24,13 +25,15 @@ public class DL4tree<T> {
         newNode.setSecond(null);
         newNode.setThird(null);
         newNode.setFourth(null);
+        head = tail;
         tail = newNode;
-        tail.setPrevious(head);
         size++;
-        }
+    }
+
     public void addToSecond(T data) {
         if (data == null) {
-            throw new IllegalArgumentException("Cannot insert null data type into a data structure");
+            throw new
+                    IllegalArgumentException("Cannot insert null data type into a data structure");
         }
         LinkedNode<T> newNode = new LinkedNode<T>(data);
         newNode.setPrevious(tail);
@@ -39,13 +42,15 @@ public class DL4tree<T> {
         newNode.setSecond(null);
         newNode.setThird(null);
         newNode.setFourth(null);
+        head = tail;
         tail = newNode;
-        tail.setPrevious(head);
         size++;
     }
+
     public void addToThird(T data) {
         if (data == null) {
-            throw new IllegalArgumentException("Cannot insert null data type into a data structure");
+            throw new
+                    IllegalArgumentException("Cannot insert null data type into a data structure");
         }
         LinkedNode<T> newNode = new LinkedNode<T>(data);
         newNode.setPrevious(tail);
@@ -54,13 +59,15 @@ public class DL4tree<T> {
         newNode.setSecond(null);
         newNode.setThird(null);
         newNode.setFourth(null);
+        head = tail;
         tail = newNode;
-        tail.setPrevious(head);
         size++;
     }
+    
     public void addToFourth(T data) {
         if (data == null) {
-            throw new IllegalArgumentException("Cannot insert null data type into a data structure");
+            throw new
+                    IllegalArgumentException("Cannot insert null data type into a data structure");
         }
         LinkedNode<T> newNode = new LinkedNode<T>(data);
         newNode.setPrevious(tail);
@@ -69,40 +76,44 @@ public class DL4tree<T> {
         newNode.setSecond(null);
         newNode.setThird(null);
         newNode.setFourth(null);
+        head = tail;
         tail = newNode;
-        tail.setPrevious(head);
         size++;
     }
-    public void goToPrevious() {
-        if (head.getPrevious() == null) {
+    public LinkedNode<T> goToPrevious() {
+        if (tail.getPrevious() == null) {
             throw new NullPointerException("Cant go back from the starting room");
         }
-        LinkedNode<T> temp = head;
-        temp.setPrevious(head);
-        temp = tail;
-        temp.setPrevious(head);
+        tail = head;
+        head = tail.getPrevious();
+        return tail;
     }
     public void goToFirst() {
         LinkedNode<T> temp = tail;
-        temp.setFirst(tail);
-        tail.setPrevious(head);
+        head = tail;
+        tail = temp.getFirst();
     }
     public void goToSecond() {
         LinkedNode<T> temp = tail;
-        temp.setSecond(tail);
-        tail.setPrevious(head);
+        head = tail;
+        tail = temp.getSecond();
     }
     public void goToThird() {
         LinkedNode<T> temp = tail;
-        temp.setThird(tail);
-        tail.setPrevious(head);
+        head = tail;
+        tail = temp.getThird();
     }
     public void goToFourth() {
         LinkedNode<T> temp = tail;
-        temp.setFourth(tail);
-        tail.setPrevious(head);
+        head = tail;
+        tail = temp.getFourth();
     }
-    public int size() {
-        return size;
+
+    public LinkedNode<T> getTail() {
+        return this.tail;
+    }
+
+    public int getSize() {
+        return this.size;
     }
 }
