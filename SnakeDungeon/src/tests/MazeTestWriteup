@@ -1,5 +1,5 @@
 Griffin Dominguez:
-I created 2 tests. The first verifies that the end screen appears after ten rooms. The second test verifies that the
+I created 2 tests. The first (testEndScreen) verifies that the end screen appears after ten rooms. The second (testGoBacK) test verifies that the
 first room has four doors.
 
 Sydney Hahn:
