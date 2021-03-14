@@ -1,0 +1,15 @@
+Griffin Dominguez:
+I created 2 tests. The first (testEndScreen) verifies that the end screen appears after ten rooms. The second (testFirstRoom) test verifies that the
+first room has four doors.
+
+Sydney Hahn:
+
+William McLanahan:
+
+James Sherman:
+I created 2 test cases: testDoor1Through() and testDoor1GoBackFunc() to test the
+functionality of going through the first door all the way until the end screen is reached
+as well as the return button functionality. Notice how after going back and then clicking the first door again,
+the same room is displayed.
+
+Jasper Pilkenton:

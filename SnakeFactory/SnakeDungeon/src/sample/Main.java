@@ -1,0 +1,247 @@
+package sample;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.util.concurrent.atomic.AtomicReference;
+
+public class Main extends Application {
+    private Stage mainWindow;
+    private GameModel gameModel;
+    private final int width = 500;
+    private final int height = 500;
+
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        mainWindow = primaryStage;
+        mainWindow.setTitle("Snake Dungeon");
+        initWelcomeScreen();
+    }
+
+    public void initWelcomeScreen() throws Exception {
+        System.out.println("Welcome");
+        WelcomeScreenController welcomeScreenController =
+                new WelcomeScreenController(width, height);
+        Scene scene = welcomeScreenController.getScene();
+        Button startButton = (Button) scene.lookup("#startButton");
+        startButton.setOnAction(e -> {
+            try {
+                goToConfigScreen();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToConfigScreen() throws Exception {
+        ConfigScreenController configScreenController = new ConfigScreenController(width, height);
+        Scene scene = configScreenController.getScene();
+        TextField farmerName = (TextField) scene.lookup("#farmerName");
+        Slider difficultySlider = (Slider) scene.lookup("#difficultySlider");
+        //Text difficulty = (Text) scene.lookup("#difficulty");
+        //difficulty.setText("Choose difficulty");
+        Button longSwordButton = (Button) scene.lookup("#longSwordButton");
+        Button maceButton = (Button) scene.lookup("#maceButton");
+        Button daggerButton = (Button) scene.lookup("#daggerButton");
+        Button begin = (Button) scene.lookup("#begin");
+
+        AtomicReference<String> weaponSelected = new AtomicReference<>("");
+        longSwordButton.setOnAction(e -> weaponSelected.set("Long Sword"));
+        maceButton.setOnAction(e -> weaponSelected.set("Mace"));
+        daggerButton.setOnAction(e -> weaponSelected.set("Dagger"));
+
+        // will need to change difficulty text to change as slider does
+        // utilize slider helper to get text equivalent to slider double value
+
+        begin.setOnAction(e -> {
+            String name = farmerName.getText();
+            String diff = difficultySliderHelper(difficultySlider.getValue());
+            int startingGold = 500 - (int) difficultySlider.getValue();
+            if (checkNameHelper(name, weaponSelected)) {
+                gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold);
+                System.out.println(gameModel.toString());
+                try {
+                    RoomController roomController =
+                            new RoomController(width, height, "InitialGameScreen.fxml");
+                    gameModel.createMaze(roomController);
+                    goToRoom(roomController);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToRoom(RoomController roomController) throws Exception {
+        System.out.println(roomController);
+        Scene scene = roomController.getScene();
+
+        System.out.println(gameModel.getMaze().getSize());
+
+        Text gold = roomController.getEnterGold();
+        Button door1 = roomController.getDoor1();
+        Button door2 = roomController.getDoor2();
+        Button door3 = roomController.getDoor3();
+        Button door4 = roomController.getDoor4();
+        Button goBack = roomController.getGoBack();
+
+        gold.setText(gameModel.getTotalGold() + " Gold Coins");
+
+        door1.setOnAction(e -> {
+            try {
+                RoomController room;
+                if (gameModel.getMaze().getTail().getFirst() == null
+                        && gameModel.getMaze().getSize() < 10) {
+                    room = new RoomController(width, height);
+                    gameModel.getMaze().addToFirst(room);
+                    goToRoom(room);
+                } else if (gameModel.getMaze().getSize() < 10) {
+                    room = gameModel.getMaze().getTail().getFirst().getData();
+                    gameModel.getMaze().goToFirst();
+                    goToRoom(room);
+                } else {
+                    goToFinalScreen();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        if (door2 != null) {
+            door2.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getSecond() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToSecond(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getSecond().getData();
+                        gameModel.getMaze().goToSecond();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        if (door3 != null) {
+            door3.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getThird() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToThird(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getThird().getData();
+                        gameModel.getMaze().goToThird();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        if (door4 != null) {
+            door4.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getFourth() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToFourth(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getFourth().getData();
+                        gameModel.getMaze().goToFourth();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        goBack.setOnAction(e -> {
+            try {
+                goToRoom(gameModel.getMaze().goToPrevious().getData());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private String difficultySliderHelper(double value) {
+        int test = (int) value / 25;
+        String temp = null;
+        switch (test) {
+        case 0:
+            temp = "Easy";
+            break;
+        case 1:
+            temp = "Normal";
+            break;
+        case 2:
+            temp = "Hard";
+            break;
+        case 3:
+            temp = "Legendary";
+            break;
+        case 4:
+            temp = "X-Games";
+            break;
+        default:
+            temp = "Easy";
+        }
+        return temp;
+    }
+
+    private boolean checkNameHelper(String name, AtomicReference<String> weaponSelected) {
+        int spaces = 0;
+        for (int i = 0; i < name.length(); i++) {
+            if (name.charAt(i) == ' ') {
+                spaces++;
+            }
+        }
+        return spaces != name.length() && name != null
+                && !name.isEmpty() && !weaponSelected.get().isEmpty();
+    }
+
+    private void goToFinalScreen() throws Exception {
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("EndScreen.fxml")));
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
