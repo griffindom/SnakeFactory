@@ -18,7 +18,7 @@ public class MazeTest extends ApplicationTest {
     }
 
     @Test
-    public void testGoBack() {
+    public void testFirstRoom() {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Not empty");
