@@ -4,7 +4,7 @@ first room has four doors.
 
 Sydney Hahn:
 
-I created 2 test cases that verify the funtionality of door 2 and the return button if door 2 is an option and is clicked.
+I created 2 test cases that verify the funtionality of door 3 and the return button if door 3 is an option and is clicked. If door 3 isn't an option then door 1 is clicked.
 
 William McLanahan:
 
