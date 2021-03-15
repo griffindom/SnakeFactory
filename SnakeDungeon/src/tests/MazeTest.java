@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import sample.Main;
-import sample.RoomController;
 
 import static org.testfx.api.FxAssert.verifyThat;
 
@@ -39,7 +38,7 @@ public class MazeTest extends ApplicationTest {
         }
         verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
     }
-    
+
     @Test
     public void testDoor1Through() {
         clickOn("#startButton");
@@ -57,7 +56,7 @@ public class MazeTest extends ApplicationTest {
         clickOn("#door1");
         clickOn("#door1");
     }
-    
+
     @Test
     public void testDoor1GoBackFunc() {
         clickOn("#startButton");
@@ -70,7 +69,7 @@ public class MazeTest extends ApplicationTest {
         clickOn("#door1");
 
     }
-    
+
     @Test
     public void testDoor3Through() {
         clickOn("#startButton");
@@ -79,15 +78,13 @@ public class MazeTest extends ApplicationTest {
         clickOn("#longSwordButton");
         clickOn("#begin");
         for (int i = 0; i < 10; i++) {
-            if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
+            if (false) {
                 clickOn("#door3");
-            }
-            else {
+            } else {
                 clickOn("#door1");
             }
         }
     }
-    
     @Test
     public void testDoor3GoBackFunc() {
         clickOn("#startButton");
@@ -95,21 +92,19 @@ public class MazeTest extends ApplicationTest {
         write("Not empty");
         clickOn("#longSwordButton");
         clickOn("#begin");
-        if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
-                clickOn("#door3");
-            }
-        else {
+        if (lookup("#door3").query() != null) {
+            clickOn("#door3");
+        } else {
             clickOn("#door1");
         }
         clickOn("#goBack");
-        if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
-                clickOn("#door3");
-            }
-        else {
+        if (lookup("#door3").query() != null) {
+            clickOn("#door3");
+        } else {
             clickOn("#door1");
         }
     }
-    
+
     @Test
     public void testEndScreenMultipleDoors() {
         clickOn("#startButton");
@@ -118,16 +113,14 @@ public class MazeTest extends ApplicationTest {
         clickOn("#daggerButton");
         clickOn("#begin");
         for (int i = 0; i < 10; i++) {
-            if(verifyThat("#door2", NodeMatchers.isNotNull()) != null) {
+            if (false) {
                 clickOn("#door2");
-            }
-            else {
+            } else {
                 clickOn("#door1");
             }
         }
         verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
     }
-    
     @Test
     public void testRoom1toEndScreen() {
         clickOn("#startButton");
@@ -147,5 +140,5 @@ public class MazeTest extends ApplicationTest {
         clickOn("#door1");
         verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
     }
-    
+
 }
