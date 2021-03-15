@@ -109,7 +109,7 @@ public class MazeTest extends ApplicationTest {
         clickOn("#daggerButton");
         clickOn("#begin");
         for (int i = 0; i < 10; i++) {
-            if(scene.lookup("#door2") != null) {
+            if(verifyThat("#door2", NodeMatchers.isNotNull()) != null) {
                 clickOn("#door2");
             }
             else {
