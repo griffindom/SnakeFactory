@@ -85,7 +85,6 @@ public class MazeTest extends ApplicationTest {
             }
         }
     }
-
     @Test
     public void testDoor3GoBackFunc() {
         clickOn("#startButton");
@@ -122,7 +121,6 @@ public class MazeTest extends ApplicationTest {
         }
         verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
     }
-
     @Test
     public void testRoom1toEndScreen() {
         clickOn("#startButton");

@@ -1,11 +1,21 @@
 Griffin Dominguez:
-I created 2 tests. The first verifies that the end screen appears after ten rooms. The second test verifies that the
+I created 2 tests. The first (testEndScreen) verifies that the end screen appears after ten rooms. The second (testFirstRoom) test verifies that the
 first room has four doors.
 
 Sydney Hahn:
 
+I created 2 test cases that verify the funtionality of door 3 and the return button if door 3 is an option and is clicked. If door 3 isn't an option then door 1 is clicked.
+
 William McLanahan:
 
 James Sherman:
+I created 2 test cases: testDoor1Through() and testDoor1GoBackFunc() to test the
+functionality of going through the first door all the way until the end screen is reached
+as well as the return button functionality. Notice how after going back and then clicking the first door again,
+the same room is displayed.
+
 
 Jasper Pilkenton:
+I created 2 test cases: The first testEndScreenMultipleDoors() verifies that the end screen appears after ten rooms have been accessed,
+regardless of which doors (door 1, 2, 3, or 4) were chosen. The second testRoom1toEndScreen() verifies that the first room 
+has 4 doors, and that each of those doors could be the path to the endScreen (as long as the player moves through 10 distinct rooms).
