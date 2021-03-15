@@ -70,4 +70,29 @@ public class MazeTest extends ApplicationTest {
         clickOn("#door1");
 
     }
+    
+    @Test
+    public void testDoor2GoBackFunc() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door2");
+        clickOn("#goBack");
+        clickOn("#door2");
+    }
+    
+    @Test
+    public void testDoor2GoBackFunc() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door3");
+        clickOn("#goBack");
+        clickOn("#door3");
+    }
+    
 }
