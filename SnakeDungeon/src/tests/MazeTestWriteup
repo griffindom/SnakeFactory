@@ -16,3 +16,6 @@ the same room is displayed.
 
 
 Jasper Pilkenton:
+I created 2 test cases: The first testEndScreenMultipleDoors() verifies that the end screen appears after ten rooms have been accessed,
+regardless of which doors (door 1, 2, 3, or 4) were chosen. The second testRoom1toEndScreen() verifies that the first room 
+has 4 doors, and that each of those doors could be the path to the endScreen (as long as the player moves through 10 distinct rooms).
