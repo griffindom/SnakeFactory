@@ -39,4 +39,35 @@ public class MazeTest extends ApplicationTest {
         }
         verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
     }
+    
+    @Test
+    public void testDoor1Through() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+    }
+    
+    @Test
+    public void testDoor1GoBackFunc() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        clickOn("#goBack");
+        clickOn("#door1");
+
+    }
 }
