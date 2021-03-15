@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -70,7 +71,10 @@ public class Main extends Application {
                 gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold);
                 System.out.println(gameModel.toString());
                 try {
-                    goToInitialGameScreen();
+                    RoomController roomController =
+                            new RoomController(width, height, "InitialGameScreen.fxml");
+                    gameModel.createMaze(roomController);
+                    goToRoom(roomController);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
@@ -81,13 +85,114 @@ public class Main extends Application {
         mainWindow.show();
     }
 
-    private void goToInitialGameScreen() throws Exception {
-        InitialGameScreenController initialGameScreenController =
-                new InitialGameScreenController(width, height);
-        Scene scene = initialGameScreenController.getScene();
+    private void goToRoom(RoomController roomController) throws Exception {
+        System.out.println(roomController);
+        Scene scene = roomController.getScene();
 
-        Text gold = (Text) scene.lookup("#enterGold");
+        System.out.println(gameModel.getMaze().getSize());
+
+        Text gold = roomController.getEnterGold();
+        Button door1 = roomController.getDoor1();
+        Button door2 = roomController.getDoor2();
+        Button door3 = roomController.getDoor3();
+        Button door4 = roomController.getDoor4();
+        Button goBack = roomController.getGoBack();
+
         gold.setText(gameModel.getTotalGold() + " Gold Coins");
+
+        door1.setOnAction(e -> {
+            try {
+                RoomController room;
+                if (gameModel.getMaze().getTail().getFirst() == null
+                        && gameModel.getMaze().getSize() < 10) {
+                    room = new RoomController(width, height);
+                    gameModel.getMaze().addToFirst(room);
+                    goToRoom(room);
+                } else if (gameModel.getMaze().getSize() < 10) {
+                    room = gameModel.getMaze().getTail().getFirst().getData();
+                    gameModel.getMaze().goToFirst();
+                    goToRoom(room);
+                } else {
+                    goToFinalScreen();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        if (door2 != null) {
+            door2.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getSecond() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToSecond(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getSecond().getData();
+                        gameModel.getMaze().goToSecond();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        if (door3 != null) {
+            door3.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getThird() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToThird(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getThird().getData();
+                        gameModel.getMaze().goToThird();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        if (door4 != null) {
+            door4.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getFourth() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToFourth(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getFourth().getData();
+                        gameModel.getMaze().goToFourth();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
+
+        goBack.setOnAction(e -> {
+            try {
+                goToRoom(gameModel.getMaze().goToPrevious().getData());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
 
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -127,6 +232,13 @@ public class Main extends Application {
         }
         return spaces != name.length() && name != null
                 && !name.isEmpty() && !weaponSelected.get().isEmpty();
+    }
+
+    private void goToFinalScreen() throws Exception {
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("EndScreen.fxml")));
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
     }
 
     public static void main(String[] args) {
