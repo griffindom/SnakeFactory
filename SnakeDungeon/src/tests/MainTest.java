@@ -50,6 +50,22 @@ public class MainTest extends ApplicationTest {
     }
 
     @Test
+    public void testNameValidity() {
+        clickOn("#startButton");
+        verifyThat("Begin", NodeMatchers.isNotNull());
+    }
+    
+    @Test
+    public void testStartUp() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#difficultySlider");
+        clickOn("#begin");
+        verifyThat("425 Gold Coins", NodeMatchers.isNotNull());
+    }
+
+    @Test
     public void testStartUp() {
         clickOn("#startButton");
         clickOn("#farmerName");
@@ -91,6 +107,6 @@ public class MainTest extends ApplicationTest {
         clickOn("#farmerName");
         write("Not empty");
         clickOn("#begin");
-        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
+        verifyThat("Choose difficulty", NodeMatchers.isNull());
     }
 }
