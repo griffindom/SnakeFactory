@@ -72,33 +72,42 @@ public class MazeTest extends ApplicationTest {
     }
     
     @Test
-    public void testDoor2Through() {
+    public void testDoor3Through() {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Not empty");
         clickOn("#longSwordButton");
         clickOn("#begin");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
-        clickOn("#door2");
+        for (int i = 0; i < 10; i++) {
+            if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
+                clickOn("#door3");
+            }
+            else {
+                clickOn("#door1");
+            }
+        }
     }
     
     @Test
-    public void testDoor2GoBackFunc() {
+    public void testDoor3GoBackFunc() {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Not empty");
         clickOn("#longSwordButton");
         clickOn("#begin");
-        clickOn("#door2");
+        if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
+                clickOn("#door3");
+            }
+        else {
+            clickOn("#door1");
+        }
         clickOn("#goBack");
-        clickOn("#door2");
+        if(verifyThat("#door3", NodeMatchers.isNotNull()) != null) {
+                clickOn("#door3");
+            }
+        else {
+            clickOn("#door1");
+        }
     }
     
     @Test
