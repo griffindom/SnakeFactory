@@ -101,4 +101,42 @@ public class MazeTest extends ApplicationTest {
         clickOn("#door2");
     }
     
+    @Test
+    public void testEndScreenMultipleDoors() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Gerald");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        for (int i = 0; i < 10; i++) {
+            if(scene.lookup("#door2") != null) {
+                clickOn("#door2");
+            }
+            else {
+                clickOn("#door1");
+            }
+        }
+        verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
+    }
+    
+    @Test
+    public void testRoom1toEndScreen() {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Aslan");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door4");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        clickOn("#door1");
+        verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
+    }
+    
 }
