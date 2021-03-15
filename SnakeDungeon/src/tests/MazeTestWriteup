@@ -7,6 +7,8 @@ Sydney Hahn:
 I created 2 test cases that verify the funtionality of door 3 and the return button if door 3 is an option and is clicked. If door 3 isn't an option then door 1 is clicked.
 
 William McLanahan:
+I created 2 tests, the first is testGoBackTwiceFunc() to ensure that you were able to go back a door more than one time.
+The second test (testLastRoomToFirst()) ensures that the player can fully traverse from the back of the maze to the front.
 
 James Sherman:
 I created 2 test cases: testDoor1Through() and testDoor1GoBackFunc() to test the
