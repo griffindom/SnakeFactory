@@ -79,6 +79,15 @@
                 </ImageView>
                 <Button fx:id="door1" layoutX="176.0" layoutY="113.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 3" />
                 <Button fx:id="door2" layoutX="384.0" layoutY="111.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 4" />
+            <Button layoutX="244.0" layoutY="147.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="146.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../Desktop/green%20snake.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             </children>
         </AnchorPane>
       <AnchorPane prefHeight="39.0" prefWidth="580.0">
@@ -94,6 +103,16 @@
                     </font>
                 </Text>
             <Button fx:id="goBack" layoutY="6.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="84.0" text="Return" />
+            <Text fx:id="enterGold1" layoutX="399.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100 Health" textOrigin="CENTER" wrappingWidth="94.3802261352539">
+               <font>
+                  <Font name="Andale Mono" size="13.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="364.0" layoutY="7.0">
+               <image>
+                  <Image url="@../../../../../Desktop/Adorable_Red_Heart_Cartoon_Emoji_-_Plain_530612071_grande.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
     </children>
