@@ -14,11 +14,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
+
     private Stage mainWindow;
     private GameModel gameModel;
+
     private final int width = 500;
     private final int height = 500;
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -118,7 +119,7 @@ public class Main extends Application {
         if (!roomController.getIsStart()) {
             snake.setOnAction(e -> {
                 roomController.dealDamage(gameModel.getAttackValue());
-                health.setText(gameModel.dealDamage(3) + " Health");
+                health.setText(gameModel.dealDamage(1) + " Health");
                 if (gameModel.getHealth() <= 0) {
                     try {
                         goToConfigScreen();
@@ -368,6 +369,10 @@ public class Main extends Application {
 
         mainWindow.setScene(scene);
         mainWindow.show();
+    }
+
+    public GameModel getGameModel() {
+        return gameModel;
     }
 
     public static void main(String[] args) {
