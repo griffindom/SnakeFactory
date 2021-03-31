@@ -8,5 +8,8 @@ Sydney Hahn:
 William McLanahan:
 
 James Sherman:
+I created two test to test the retreat mechanism. The first test verifies that the snake spawned in the first room
+before and after retreat are the same. The second test tests if the snake in the first room is different than the snake
+that spawns in a different room. 
 
 Jasper Pilkenton:
