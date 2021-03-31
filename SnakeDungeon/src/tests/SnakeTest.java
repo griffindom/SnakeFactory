@@ -1,18 +1,72 @@
 package tests;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
+import sample.GameModel;
 import sample.Main;
+import sample.RoomController;
 
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SnakeTest extends ApplicationTest {
 
+    private Main controller;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Main controller = new Main();
+        controller = new Main();
         controller.start(primaryStage);
+    }
+
+    @Test
+    public void testSnakesSpawn() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        for (int i = 0; i < 9; i++) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#door1");
+        }
+        verifyThat("You escaped the Snake Dungeon!", NodeMatchers.isNotNull());
+    }
+
+    @Test
+    public void testDeath() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        drag("#difficultySlider");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        while (gameModel.getHealth() > 0) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null && gameModel.getHealth() > 0) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            if (gameModel.getHealth() > 0) {
+                clickOn("#door1");
+            }
+        }
+        verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
 }

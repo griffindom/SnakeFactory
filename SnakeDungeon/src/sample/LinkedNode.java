@@ -24,7 +24,7 @@ public class LinkedNode<T> {
         this(data, null, null, null, null, null, true);
     }
 
-    T getData() {
+    public T getData() {
         return data;
     }
 
