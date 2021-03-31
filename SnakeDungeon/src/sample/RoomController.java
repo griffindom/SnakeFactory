@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import java.util.Random;
 
@@ -29,10 +30,21 @@ public class RoomController {
     @FXML
     private Button goBack;
 
+    @FXML
+    private Button snake;
+
+    @FXML
+    private Text enterHealth;
+
+    @FXML
+    private AnchorPane snakePane;
+
     private Scene scene;
     private int height;
     private int width;
     private String roomType;
+    private int snakeHealth;
+    private boolean isStart;
 
     public RoomController() {
 
@@ -44,6 +56,9 @@ public class RoomController {
         this.scene = new Scene(FXMLLoader.load(getClass().getResource(this.randomScene())));
         this.enterGold = (Text) scene.lookup("#enterGold");
         this.goBack = (Button) scene.lookup("#goBack");
+        this.snakePane = (AnchorPane) scene.lookup("#snakePane");
+        this.isStart = false;
+        this.enterHealth = (Text) scene.lookup("#enterHealth");
         this.initDoors();
     }
 
@@ -54,6 +69,9 @@ public class RoomController {
         this.scene = new Scene(FXMLLoader.load(getClass().getResource(room)));
         this.enterGold = (Text) scene.lookup("#enterGold");
         this.goBack = (Button) scene.lookup("#goBack");
+        this.snakePane = (AnchorPane) scene.lookup("#snakePane");
+        this.enterHealth = (Text) scene.lookup("#enterHealth");
+        this.isStart = true;
         this.initDoors();
     }
 
@@ -85,8 +103,45 @@ public class RoomController {
         return this.goBack;
     }
 
+    public Button getSnake() {
+        return snake;
+    }
+
+    public void setSnake(Button snake) {
+        this.snake = snake;
+    }
+
+    public Text getEnterHealth() {
+        return enterHealth;
+    }
+
+    public void setEnterHealth(Text enterHealth) {
+        this.enterHealth = enterHealth;
+    }
+
+    public int getSnakeHealth() {
+        return this.snakeHealth;
+    }
+
+    public boolean getIsStart() {
+        return this.isStart;
+    }
+
+    public void setSnakeHealth(int snakeHealth) {
+        this.snakeHealth = snakeHealth;
+    }
+
+    public AnchorPane getSnakePane() {
+        return snakePane;
+    }
+
+    public void dealDamage(int attack) {
+        this.snakeHealth -= attack;
+        System.out.println("Snake now has " + snakeHealth + " health.");
+    }
+
     public String randomScene() {
-        String[] rooms = {"1door.fxml", "2door.fxml", "3door.fxml", "InitialGameScreen.fxml"};
+        String[] rooms = {"1door.fxml", "2door.fxml", "3door.fxml", "4door.fxml"};
         Random rand = new Random();
         int room = rand.nextInt(4);
         this.roomType = rooms[room];
@@ -100,24 +155,40 @@ public class RoomController {
             door2 = null;
             door3 = null;
             door4 = null;
+            snake = (Button) scene.lookup("#snake");
+            this.snakeHealth = 20;
             break;
         case "2door.fxml":
             door1 = (Button) scene.lookup("#door1");
             door2 = (Button) scene.lookup("#door2");
             door3 = null;
             door4 = null;
+            snake = (Button) scene.lookup("#snake");
+            this.snakeHealth = 10;
             break;
         case "3door.fxml":
             door1 = (Button) scene.lookup("#door1");
             door2 = (Button) scene.lookup("#door2");
             door3 = (Button) scene.lookup("#door3");
             door4 = null;
+            snake = (Button) scene.lookup("#snake");
+            this.snakeHealth = 30;
+            break;
+        case "4door.fxml":
+            door1 = (Button) scene.lookup("#door1");
+            door2 = (Button) scene.lookup("#door2");
+            door3 = (Button) scene.lookup("#door3");
+            door4 = (Button) scene.lookup("#door4");;
+            snake = (Button) scene.lookup("#snake");
+            this.snakeHealth = 40;
             break;
         case "InitialGameScreen.fxml":
             door1 = (Button) scene.lookup("#door1");
             door2 = (Button) scene.lookup("#door2");
             door3 = (Button) scene.lookup("#door3");
             door4 = (Button) scene.lookup("#door4");
+            snake = (Button) scene.lookup("#snake");
+            this.snakeHealth = 0;
             break;
         default:
             break;
