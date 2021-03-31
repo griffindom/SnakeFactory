@@ -69,4 +69,48 @@ public class SnakeTest extends ApplicationTest {
         }
         verifyThat("Choose difficulty", NodeMatchers.isNotNull());
     }
+    
+    @Test
+    public void testRetreatAndRe_enter() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Retreat Test 1");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int firstHealth = room.getSnakeHealth();
+        clickOn("#goBack");
+        clickOn("#door1");
+        int secondHealth = room.getSnakeHealth();
+        assertEquals(firstHealth, secondHealth);
+    }
+    
+    @Test
+    public void testRetreatThenNewRoom() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Retreat Test 1");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int firstHealth = room.getSnakeHealth();
+        clickOn("#goBack");
+        clickOn("#door2");
+        gameModel = controller.getGameModel();
+        room = controller.getGameModel().getMaze().getTail().getData();
+        int secondHealth = room.getSnakeHealth();
+        assertNotEquals(firstHealth, secondHealth);
+    }
 }
