@@ -6,9 +6,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Main extends Application {
@@ -67,8 +69,12 @@ public class Main extends Application {
             String name = farmerName.getText();
             String diff = difficultySliderHelper(difficultySlider.getValue());
             int startingGold = 500 - (int) difficultySlider.getValue();
+            int health = 100;
+            if ((int) difficultySlider.getValue() == 100) {
+                health = 5;
+            }
             if (checkNameHelper(name, weaponSelected)) {
-                gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold);
+                gameModel = new GameModel(name, diff, weaponSelected.get(), startingGold, health);
                 System.out.println(gameModel.toString());
                 try {
                     RoomController roomController =
@@ -92,99 +98,222 @@ public class Main extends Application {
         System.out.println(gameModel.getMaze().getSize());
 
         Text gold = roomController.getEnterGold();
+        Text health = roomController.getEnterHealth();
         Button door1 = roomController.getDoor1();
         Button door2 = roomController.getDoor2();
         Button door3 = roomController.getDoor3();
         Button door4 = roomController.getDoor4();
         Button goBack = roomController.getGoBack();
+        Button snake = roomController.getSnake();
+        AnchorPane snakePane = roomController.getSnakePane();
+        AtomicBoolean snakeDead = new AtomicBoolean(false);
 
         gold.setText(gameModel.getTotalGold() + " Gold Coins");
+        health.setText(gameModel.getHealth() + " Health");
 
-        door1.setOnAction(e -> {
-            try {
-                RoomController room;
-                if (gameModel.getMaze().getTail().getFirst() == null
-                        && gameModel.getMaze().getSize() < 10) {
-                    room = new RoomController(width, height);
-                    gameModel.getMaze().addToFirst(room);
-                    goToRoom(room);
-                } else if (gameModel.getMaze().getSize() < 10) {
-                    room = gameModel.getMaze().getTail().getFirst().getData();
-                    gameModel.getMaze().goToFirst();
-                    goToRoom(room);
-                } else {
-                    goToFinalScreen();
+        if (roomController.getIsStart()) {
+            snakePane.getChildren().remove(snake);
+        }
+
+        if (!roomController.getIsStart()) {
+            snake.setOnAction(e -> {
+                roomController.dealDamage(gameModel.getAttackValue());
+                health.setText(gameModel.dealDamage(3) + " Health");
+                if (gameModel.getHealth() <= 0) {
+                    try {
+                        goToConfigScreen();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                 }
-            } catch (Exception exception) {
-                exception.printStackTrace();
+                if (roomController.getSnakeHealth() <= 0) {
+                    snakePane.getChildren().remove(snake);
+                    snakeDead.set(true);
+
+                    if (true) {
+                        door1.setOnAction(m -> {
+                            try {
+                                RoomController room;
+                                if (gameModel.getMaze().getTail().getFirst() == null
+                                        && gameModel.getMaze().getSize() < 10) {
+                                    room = new RoomController(width, height);
+                                    gameModel.getMaze().addToFirst(room);
+                                    goToRoom(room);
+                                } else if (gameModel.getMaze().getSize() < 10) {
+                                    room = gameModel.getMaze().getTail().getFirst().getData();
+                                    gameModel.getMaze().goToFirst();
+                                    goToRoom(room);
+                                } else {
+                                    goToFinalScreen();
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                    }
+
+                    if (door2 != null) {
+                        door2.setOnAction(m -> {
+                            try {
+                                RoomController room;
+                                System.out.println(roomController.getSnakeHealth());
+                                if (gameModel.getMaze().getTail().getSecond() == null
+                                        && gameModel.getMaze().getSize() < 10) {
+                                    room = new RoomController(width, height);
+                                    gameModel.getMaze().addToSecond(room);
+                                    goToRoom(room);
+                                } else if (gameModel.getMaze().getSize() < 10) {
+                                    room = gameModel.getMaze().getTail().getSecond().getData();
+                                    gameModel.getMaze().goToSecond();
+                                    goToRoom(room);
+                                } else {
+                                    goToFinalScreen();
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                    }
+
+                    if (door3 != null) {
+                        door3.setOnAction(m -> {
+                            try {
+                                RoomController room;
+                                System.out.println(roomController.getSnakeHealth());
+                                if (gameModel.getMaze().getTail().getThird() == null
+                                        && gameModel.getMaze().getSize() < 10) {
+                                    room = new RoomController(width, height);
+                                    gameModel.getMaze().addToThird(room);
+                                    goToRoom(room);
+                                } else if (gameModel.getMaze().getSize() < 10) {
+                                    room = gameModel.getMaze().getTail().getThird().getData();
+                                    gameModel.getMaze().goToThird();
+                                    goToRoom(room);
+                                } else {
+                                    goToFinalScreen();
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                    }
+
+                    if (door4 != null) {
+                        door4.setOnAction(m -> {
+                            try {
+                                RoomController room;
+                                System.out.println(roomController.getSnakeHealth());
+                                if (gameModel.getMaze().getTail().getFourth() == null
+                                        && gameModel.getMaze().getSize() < 10) {
+                                    room = new RoomController(width, height);
+                                    gameModel.getMaze().addToFourth(room);
+                                    goToRoom(room);
+                                } else if (gameModel.getMaze().getSize() < 10) {
+                                    room = gameModel.getMaze().getTail().getFourth().getData();
+                                    gameModel.getMaze().goToFourth();
+                                    goToRoom(room);
+                                } else {
+                                    goToFinalScreen();
+                                }
+                            } catch (Exception exception) {
+                                exception.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        if (snakeDead.get() || roomController.getIsStart()) {
+                door1.setOnAction(e -> {
+                    try {
+                        RoomController room;
+                        if (gameModel.getMaze().getTail().getFirst() == null
+                                && gameModel.getMaze().getSize() < 10) {
+                            room = new RoomController(width, height);
+                            gameModel.getMaze().addToFirst(room);
+                            goToRoom(room);
+                        } else if (gameModel.getMaze().getSize() < 10) {
+                            room = gameModel.getMaze().getTail().getFirst().getData();
+                            gameModel.getMaze().goToFirst();
+                            goToRoom(room);
+                        } else {
+                            goToFinalScreen();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                });
             }
-        });
 
-        if (door2 != null) {
-            door2.setOnAction(e -> {
-                try {
-                    RoomController room;
-                    if (gameModel.getMaze().getTail().getSecond() == null
-                            && gameModel.getMaze().getSize() < 10) {
-                        room = new RoomController(width, height);
-                        gameModel.getMaze().addToSecond(room);
-                        goToRoom(room);
-                    } else if (gameModel.getMaze().getSize() < 10) {
-                        room = gameModel.getMaze().getTail().getSecond().getData();
-                        gameModel.getMaze().goToSecond();
-                        goToRoom(room);
-                    } else {
-                        goToFinalScreen();
+        if (door2 != null && (snakeDead.get() || roomController.getIsStart())) {
+                door2.setOnAction(e -> {
+                    try {
+                        RoomController room;
+                        System.out.println(roomController.getSnakeHealth());
+                        if (gameModel.getMaze().getTail().getSecond() == null
+                                && gameModel.getMaze().getSize() < 10) {
+                            room = new RoomController(width, height);
+                            gameModel.getMaze().addToSecond(room);
+                            goToRoom(room);
+                        } else if (gameModel.getMaze().getSize() < 10) {
+                            room = gameModel.getMaze().getTail().getSecond().getData();
+                            gameModel.getMaze().goToSecond();
+                            goToRoom(room);
+                        } else {
+                            goToFinalScreen();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            });
-        }
+                });
+            }
 
-        if (door3 != null) {
-            door3.setOnAction(e -> {
-                try {
-                    RoomController room;
-                    if (gameModel.getMaze().getTail().getThird() == null
-                            && gameModel.getMaze().getSize() < 10) {
-                        room = new RoomController(width, height);
-                        gameModel.getMaze().addToThird(room);
-                        goToRoom(room);
-                    } else if (gameModel.getMaze().getSize() < 10) {
-                        room = gameModel.getMaze().getTail().getThird().getData();
-                        gameModel.getMaze().goToThird();
-                        goToRoom(room);
-                    } else {
-                        goToFinalScreen();
+        if (door3 != null && (snakeDead.get() || roomController.getIsStart())) {
+                door3.setOnAction(e -> {
+                    try {
+                        RoomController room;
+                        System.out.println(roomController.getSnakeHealth());
+                        if (gameModel.getMaze().getTail().getThird() == null
+                                && gameModel.getMaze().getSize() < 10) {
+                            room = new RoomController(width, height);
+                            gameModel.getMaze().addToThird(room);
+                            goToRoom(room);
+                        } else if (gameModel.getMaze().getSize() < 10) {
+                            room = gameModel.getMaze().getTail().getThird().getData();
+                            gameModel.getMaze().goToThird();
+                            goToRoom(room);
+                        } else {
+                            goToFinalScreen();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            });
-        }
+                });
+            }
 
-        if (door4 != null) {
-            door4.setOnAction(e -> {
-                try {
-                    RoomController room;
-                    if (gameModel.getMaze().getTail().getFourth() == null
-                            && gameModel.getMaze().getSize() < 10) {
-                        room = new RoomController(width, height);
-                        gameModel.getMaze().addToFourth(room);
-                        goToRoom(room);
-                    } else if (gameModel.getMaze().getSize() < 10) {
-                        room = gameModel.getMaze().getTail().getFourth().getData();
-                        gameModel.getMaze().goToFourth();
-                        goToRoom(room);
-                    } else {
-                        goToFinalScreen();
+        if (door4 != null && (snakeDead.get() || roomController.getIsStart())) {
+                door4.setOnAction(e -> {
+                    try {
+                        RoomController room;
+                        System.out.println(roomController.getSnakeHealth());
+                        if (gameModel.getMaze().getTail().getFourth() == null
+                                && gameModel.getMaze().getSize() < 10) {
+                            room = new RoomController(width, height);
+                            gameModel.getMaze().addToFourth(room);
+                            goToRoom(room);
+                        } else if (gameModel.getMaze().getSize() < 10) {
+                            room = gameModel.getMaze().getTail().getFourth().getData();
+                            gameModel.getMaze().goToFourth();
+                            goToRoom(room);
+                        } else {
+                            goToFinalScreen();
+                        }
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
                     }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
-            });
-        }
+                });
+            }
 
         goBack.setOnAction(e -> {
             try {

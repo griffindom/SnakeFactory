@@ -60,7 +60,7 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="snakePane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
                 <ImageView fitHeight="332.0" fitWidth="652.0">
                     <image>
@@ -79,6 +79,15 @@
                 </ImageView>
                 <Button fx:id="door1" layoutX="176.0" layoutY="113.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 3" />
                 <Button fx:id="door2" layoutX="384.0" layoutY="111.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 4" />
+            <Button fx:id="snake" layoutX="244.0" layoutY="147.0" mnemonicParsing="false">
+               <graphic>
+                  <ImageView fitHeight="146.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../sample/greenSnake.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             </children>
         </AnchorPane>
       <AnchorPane prefHeight="39.0" prefWidth="580.0">
@@ -94,6 +103,16 @@
                     </font>
                 </Text>
             <Button fx:id="goBack" layoutY="6.0" mnemonicParsing="false" prefHeight="8.0" prefWidth="84.0" text="Return" />
+            <Text fx:id="enterHealth" layoutX="399.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="100 Health" textOrigin="CENTER" wrappingWidth="94.3802261352539">
+               <font>
+                  <Font name="Andale Mono" size="13.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="364.0" layoutY="7.0">
+               <image>
+                  <Image url="@../sample/redHeart.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
     </children>
