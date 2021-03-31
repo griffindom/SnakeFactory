@@ -85,11 +85,11 @@
                 <Button fx:id="door1" layoutX="134.0" layoutY="111.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 2" />
                 <Button fx:id="door2" layoutX="293.0" layoutY="113.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 3" />
                 <Button fx:id="door3" layoutX="453.0" layoutY="111.0" mnemonicParsing="false" opacity="0.0" prefHeight="112.0" prefWidth="66.0" text="Exit 4" />
-            <Button layoutX="250.0" layoutY="169.0" mnemonicParsing="false">
+            <Button fx:id="orangesnake" layoutX="250.0" layoutY="169.0" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="135.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../../Desktop/orange%20snake.png" />
+                        <Image url="@../sample/orangesnake.png" />
                      </image>
                   </ImageView>
                </graphic>
