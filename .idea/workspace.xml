@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="87341eb1-401f-4952-9e66-7f8cc33c574f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/org_testfx_testfx_junit_4_0_6_alpha.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/ConfigScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/ConfigScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/GameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/InitialGameScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/InitialGameScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/initialGameScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/initialGameScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/sample/welcomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/sample/welcomeScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SnakeDungeon/src/tests/SnakeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeDungeon/src/tests/SnakeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SnakeFactory.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SnakeFactory.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,18 +42,23 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.SnakeTest.testHealthDoesntResetWhenReenteringRoom">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
       <module name="SnakeFactory" />
@@ -52,8 +72,53 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SnakeTest.testHealthDoesntResetWhenReenteringRoom" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SnakeFactory" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.SnakeTest" />
+      <option name="METHOD_NAME" value="testHealthDoesntResetWhenReenteringRoom" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SnakeTest.testPlayerDamage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SnakeFactory" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.SnakeTest" />
+      <option name="METHOD_NAME" value="testPlayerDamage" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.SnakeTest.testHealthDoesntResetWhenReenteringRoom" />
+        <item itemvalue="JUnit.SnakeTest.testPlayerDamage" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -70,6 +135,7 @@
       <workItem from="1614313839860" duration="54000" />
       <workItem from="1614313960406" duration="4029000" />
       <workItem from="1614318248211" duration="1044000" />
+      <workItem from="1617221666170" duration="1791000" />
     </task>
     <servers />
   </component>
@@ -87,5 +153,31 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1617223818605">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617223818605" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1617223818605">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617223818605" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1617223818605">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617223818605" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1617223818605">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617223818605" />
+    <state x="249" y="0" key="SettingsEditor" timestamp="1617221796899">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1617221796899" />
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1617221788840">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1617221788840" />
   </component>
 </project>

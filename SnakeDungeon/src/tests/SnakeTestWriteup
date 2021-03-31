@@ -6,6 +6,8 @@ Sydney Hahn:
 
 
 William McLanahan:
+I created 2 tests regarding the player's health points. The first tests verifies that the player is able to take damage
+when a snake attacks him/her. The second test verifies that the player's HP does not reset when entering a room again.
 
 James Sherman:
 I created two test to test the retreat mechanism. The first test verifies that the snake spawned in the first room

@@ -3,6 +3,7 @@ package tests;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -11,6 +12,9 @@ import sample.GameModel;
 import sample.Main;
 import sample.RoomController;
 
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SnakeTest extends ApplicationTest {
@@ -112,5 +116,43 @@ public class SnakeTest extends ApplicationTest {
         room = controller.getGameModel().getMaze().getTail().getData();
         int secondHealth = room.getSnakeHealth();
         assertNotEquals(firstHealth, secondHealth);
+    }
+
+    @Test
+    public void testPlayerDamage() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        int fullHP = gameModel.getHealth();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int lowerHP = gameModel.getHealth();
+        assertNotEquals(fullHP, lowerHP);
+    }
+
+    @Test
+    public void testHealthDoesntResetWhenReenteringRoom() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int firstHP = gameModel.getHealth();
+        clickOn("#goBack");
+        clickOn("#door1");
+        int secondHP= gameModel.getHealth();
+        assertEquals(firstHP, secondHP);
     }
 }
