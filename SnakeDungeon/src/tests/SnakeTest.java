@@ -2,8 +2,6 @@ package tests;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -74,7 +72,7 @@ public class SnakeTest extends ApplicationTest {
     }
     
     @Test
-    public void testRetreatAndRe_enter() throws Exception {
+    public void testRetreatAndReenter() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Retreat Test 1");
@@ -151,7 +149,7 @@ public class SnakeTest extends ApplicationTest {
         int firstHP = gameModel.getHealth();
         clickOn("#goBack");
         clickOn("#door1");
-        int secondHP= gameModel.getHealth();
+        int secondHP = gameModel.getHealth();
         assertEquals(firstHP, secondHP);
     }
 

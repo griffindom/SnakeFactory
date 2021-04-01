@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.scene.control.Button;
 import java.util.Random;
 
 public class GameModel {
@@ -18,7 +17,8 @@ public class GameModel {
 
     }
 
-    public GameModel(String farmerName, String difficulty, String startingWeapon, int totalGold, int health) {
+    public GameModel(String farmerName, String difficulty,
+                     String startingWeapon, int totalGold, int health) {
         this.farmerName = farmerName;
         this.difficulty = difficulty;
         this.startingWeapon = startingWeapon;
@@ -85,20 +85,20 @@ public class GameModel {
 
     private void initAttackValues(String weapon) {
         switch (weapon) {
-            case "Long Sword":
-                this.minAttack = 5;
-                this.maxAttack = 11;
-                break;
-            case "Mace":
-                this.minAttack = 7;
-                this.maxAttack = 9;
-                break;
-            case "Dagger":
-                this.minAttack = 2;
-                this.maxAttack = 4;
-                break;
-            default:
-                break;
+        case "Long Sword":
+            this.minAttack = 5;
+            this.maxAttack = 11;
+            break;
+        case "Mace":
+            this.minAttack = 7;
+            this.maxAttack = 9;
+            break;
+        case "Dagger":
+            this.minAttack = 2;
+            this.maxAttack = 4;
+            break;
+        default:
+            break;
         }
     }
 

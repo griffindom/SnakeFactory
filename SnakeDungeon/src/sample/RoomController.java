@@ -178,7 +178,7 @@ public class RoomController {
             door1 = (Button) scene.lookup("#door1");
             door2 = (Button) scene.lookup("#door2");
             door3 = (Button) scene.lookup("#door3");
-            door4 = (Button) scene.lookup("#door4");;
+            door4 = (Button) scene.lookup("#door4");
             snake = (Button) scene.lookup("#snake");
             this.snakeHealth = 40;
             break;

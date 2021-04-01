@@ -226,95 +226,95 @@ public class Main extends Application {
         }
 
         if (snakeDead.get() || roomController.getIsStart()) {
-                door1.setOnAction(e -> {
-                    try {
-                        RoomController room;
-                        if (gameModel.getMaze().getTail().getFirst() == null
-                                && gameModel.getMaze().getSize() < 10) {
-                            room = new RoomController(width, height);
-                            gameModel.getMaze().addToFirst(room);
-                            goToRoom(room);
-                        } else if (gameModel.getMaze().getSize() < 10) {
-                            room = gameModel.getMaze().getTail().getFirst().getData();
-                            gameModel.getMaze().goToFirst();
-                            goToRoom(room);
-                        } else {
-                            goToFinalScreen();
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+            door1.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    if (gameModel.getMaze().getTail().getFirst() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToFirst(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getFirst().getData();
+                        gameModel.getMaze().goToFirst();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
                     }
-                });
-            }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
 
         if (door2 != null && (snakeDead.get() || roomController.getIsStart())) {
-                door2.setOnAction(e -> {
-                    try {
-                        RoomController room;
-                        System.out.println(roomController.getSnakeHealth());
-                        if (gameModel.getMaze().getTail().getSecond() == null
-                                && gameModel.getMaze().getSize() < 10) {
-                            room = new RoomController(width, height);
-                            gameModel.getMaze().addToSecond(room);
-                            goToRoom(room);
-                        } else if (gameModel.getMaze().getSize() < 10) {
-                            room = gameModel.getMaze().getTail().getSecond().getData();
-                            gameModel.getMaze().goToSecond();
-                            goToRoom(room);
-                        } else {
-                            goToFinalScreen();
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+            door2.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    System.out.println(roomController.getSnakeHealth());
+                    if (gameModel.getMaze().getTail().getSecond() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToSecond(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getSecond().getData();
+                        gameModel.getMaze().goToSecond();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
                     }
-                });
-            }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
 
         if (door3 != null && (snakeDead.get() || roomController.getIsStart())) {
-                door3.setOnAction(e -> {
-                    try {
-                        RoomController room;
-                        System.out.println(roomController.getSnakeHealth());
-                        if (gameModel.getMaze().getTail().getThird() == null
-                                && gameModel.getMaze().getSize() < 10) {
-                            room = new RoomController(width, height);
-                            gameModel.getMaze().addToThird(room);
-                            goToRoom(room);
-                        } else if (gameModel.getMaze().getSize() < 10) {
-                            room = gameModel.getMaze().getTail().getThird().getData();
-                            gameModel.getMaze().goToThird();
-                            goToRoom(room);
-                        } else {
-                            goToFinalScreen();
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+            door3.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    System.out.println(roomController.getSnakeHealth());
+                    if (gameModel.getMaze().getTail().getThird() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToThird(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getThird().getData();
+                        gameModel.getMaze().goToThird();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
                     }
-                });
-            }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
 
         if (door4 != null && (snakeDead.get() || roomController.getIsStart())) {
-                door4.setOnAction(e -> {
-                    try {
-                        RoomController room;
-                        System.out.println(roomController.getSnakeHealth());
-                        if (gameModel.getMaze().getTail().getFourth() == null
-                                && gameModel.getMaze().getSize() < 10) {
-                            room = new RoomController(width, height);
-                            gameModel.getMaze().addToFourth(room);
-                            goToRoom(room);
-                        } else if (gameModel.getMaze().getSize() < 10) {
-                            room = gameModel.getMaze().getTail().getFourth().getData();
-                            gameModel.getMaze().goToFourth();
-                            goToRoom(room);
-                        } else {
-                            goToFinalScreen();
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
+            door4.setOnAction(e -> {
+                try {
+                    RoomController room;
+                    System.out.println(roomController.getSnakeHealth());
+                    if (gameModel.getMaze().getTail().getFourth() == null
+                            && gameModel.getMaze().getSize() < 10) {
+                        room = new RoomController(width, height);
+                        gameModel.getMaze().addToFourth(room);
+                        goToRoom(room);
+                    } else if (gameModel.getMaze().getSize() < 10) {
+                        room = gameModel.getMaze().getTail().getFourth().getData();
+                        gameModel.getMaze().goToFourth();
+                        goToRoom(room);
+                    } else {
+                        goToFinalScreen();
                     }
-                });
-            }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+        }
 
         goBack.setOnAction(e -> {
             try {
