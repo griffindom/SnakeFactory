@@ -155,4 +155,40 @@ public class SnakeTest extends ApplicationTest {
         int secondHP= gameModel.getHealth();
         assertEquals(firstHP, secondHP);
     }
+    
+    public void testDaggerDamage() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        Button snake = (Button) scene.lookup("#snake");
+        int firstHP = gameModel.getHealth();
+        clickOn("#snake");
+        int afterHP = gameModel.getHealth();
+        int attack = gameModel.getAttackValue();
+        assertEquals((firstHP - attack), afterHP);
+    }
+
+    public void testSwordDamage() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        Button snake = (Button) scene.lookup("#snake");
+        int firstHP = gameModel.getHealth();
+        clickOn("#snake");
+        int afterHP = gameModel.getHealth();
+        int attack = gameModel.getAttackValue();
+        assertEquals((firstHP - attack), afterHP);
+    }
 }
