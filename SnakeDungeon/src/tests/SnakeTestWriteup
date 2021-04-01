@@ -3,7 +3,7 @@ I created two tests. The first test verifies that a snake swans in every room. T
 the player is taken back to the configuration screen.
 
 Sydney Hahn:
-I created 2 tests that test the damage of 2 of the weapons: the mace and the dagger. It ensures that the weapon's damage
+I created 2 tests that test the damage of 2 of the weapons: the longsword and the dagger. It ensures that the weapon's damage
 affects the player's health accordingly.
 
 William McLanahan:
@@ -16,3 +16,6 @@ before and after retreat are the same. The second test tests if the snake in the
 that spawns in a different room. 
 
 Jasper Pilkenton:
+I created 2 tests, the first of which tests to verify that our weapon damage calculation using a random function works as intended
+(makes sure damage output is not outside of damage range). The second test verifies that the weapon damage calculation works
+with the Mace-weapon's damage range (each weapon has a different damage range). 
