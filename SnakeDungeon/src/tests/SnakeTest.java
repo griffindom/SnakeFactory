@@ -13,8 +13,7 @@ import sample.Main;
 import sample.RoomController;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 import static org.testfx.api.FxAssert.verifyThat;
 
 public class SnakeTest extends ApplicationTest {
