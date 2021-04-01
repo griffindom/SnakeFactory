@@ -155,62 +155,62 @@ public class SnakeTest extends ApplicationTest {
         int secondHP= gameModel.getHealth();
         assertEquals(firstHP, secondHP);
     }
-    
-    @Test
-    public void testDaggerDamage() throws Exception {
-        clickOn("#startButton");
-        clickOn("#farmerName");
-        write("Not empty");
-        clickOn("#daggerButton");
-        clickOn("#begin");
-        clickOn("#door1");
-        GameModel gameModel = controller.getGameModel();
-        RoomController room = controller.getGameModel().getMaze().getTail().getData();
-        Scene scene = room.getScene();
-        Button snake = (Button) scene.lookup("#snake");
-        int firstHP = gameModel.getHealth();
-        clickOn("#snake");
-        int afterHP = gameModel.getHealth();
-        int attack = gameModel.getAttackValue();
-        assertEquals((firstHP - attack), afterHP);
-    }
 
     @Test
     public void testMaceDamage() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
-        write("Not empty");
+        write("Mace Damage");
         clickOn("#maceButton");
         clickOn("#begin");
         clickOn("#door1");
         GameModel gameModel = controller.getGameModel();
         RoomController room = controller.getGameModel().getMaze().getTail().getData();
         Scene scene = room.getScene();
+        int fullHP = gameModel.getHealth();
         Button snake = (Button) scene.lookup("#snake");
-        int firstHP = gameModel.getHealth();
         clickOn("#snake");
-        int afterHP = gameModel.getHealth();
-        int attack = gameModel.getAttackValue();
-        assertEquals((firstHP - attack), afterHP);
+        int damage = gameModel.getAttackValue();
+        assertTrue("Error, damage is too low", damage >= 7);
+        assertTrue("Error, damage is too high", damage <= 16);
     }
 
     @Test
-    public void testSwordDamage() throws Exception {
+    public void testLongSwordDamage() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
-        write("Not empty");
+        write("LSwordDamage");
         clickOn("#longSwordButton");
         clickOn("#begin");
         clickOn("#door1");
         GameModel gameModel = controller.getGameModel();
         RoomController room = controller.getGameModel().getMaze().getTail().getData();
         Scene scene = room.getScene();
+        int fullHP = gameModel.getHealth();
         Button snake = (Button) scene.lookup("#snake");
-        int firstHP = gameModel.getHealth();
         clickOn("#snake");
-        int afterHP = gameModel.getHealth();
-        int attack = gameModel.getAttackValue();
-        assertEquals((firstHP - attack), afterHP);
+        int damage = gameModel.getAttackValue();
+        assertTrue("Error, damage is too low", damage >= 5);
+        assertTrue("Error, damage is too high", damage <= 16);
+    }
+
+    @Test
+    public void testDaggerDamage() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Dagger Damage");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        int fullHP = gameModel.getHealth();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int damage = gameModel.getAttackValue();
+        assertTrue("Error, damage is too low", damage >= 2);
+        assertTrue("Error, damage is too high", damage <= 6);
     }
     
     @Test
