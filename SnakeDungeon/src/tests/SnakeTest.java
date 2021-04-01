@@ -156,6 +156,7 @@ public class SnakeTest extends ApplicationTest {
         assertEquals(firstHP, secondHP);
     }
     
+    @Test
     public void testDaggerDamage() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
@@ -174,6 +175,7 @@ public class SnakeTest extends ApplicationTest {
         assertEquals((firstHP - attack), afterHP);
     }
 
+    @Test
     public void testSwordDamage() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
@@ -190,5 +192,24 @@ public class SnakeTest extends ApplicationTest {
         int afterHP = gameModel.getHealth();
         int attack = gameModel.getAttackValue();
         assertEquals((firstHP - attack), afterHP);
+    }
+    
+    @Test
+    public void testDamageNumbers() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        Scene scene = room.getScene();
+        int fullHP = gameModel.getHealth();
+        Button snake = (Button) scene.lookup("#snake");
+        clickOn("#snake");
+        int damage = gameModel.getAttackValue();
+        assertTrue("Error, random is too low", damage >= 5);
+        assertTrue("Error, random is too high", damage <= 16);
     }
 }
