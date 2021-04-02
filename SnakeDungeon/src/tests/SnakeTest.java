@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
-import sample.GameModel;
-import sample.Main;
-import sample.RoomController;
+import game.support.GameModel;
+import game.controllers.MainController;
+import game.controllers.RoomController;
 
 
 import static org.junit.Assert.*;
@@ -16,11 +16,11 @@ import static org.testfx.api.FxAssert.verifyThat;
 
 public class SnakeTest extends ApplicationTest {
 
-    private Main controller;
+    private MainController controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        controller = new Main();
+        controller = new MainController();
         controller.start(primaryStage);
     }
 

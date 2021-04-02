@@ -6,7 +6,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.base.NodeMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
-import sample.Main;
+import game.controllers.MainController;
 
 import static org.testfx.api.FxAssert.verifyThat;
 
@@ -14,7 +14,7 @@ public class MainTest extends ApplicationTest {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Main controller = new Main();
+        MainController controller = new MainController();
         controller.start(primaryStage);
     }
 
