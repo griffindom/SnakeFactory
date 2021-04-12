@@ -339,16 +339,16 @@ public class MainController extends Application {
     private String dropItem(RoomController roomController) {
         String item;
         Random rand = new Random();
-        int num = rand.nextInt(4);
+        int num = rand.nextInt(13);
         switch (num) {
             case 0:
-                item = "Health Potion";
+                item = "Attack Potion";
                 break;
             case 1:
                 item = "Attack Potion";
                 break;
             case 2:
-                item = "Dagger";
+                item = "Attack Potion";
                 break;
             case 3:
                 item = "Shovel";
@@ -356,8 +356,23 @@ public class MainController extends Application {
             case 4:
                 item = "Bow";
                 break;
+            case 5:
+                item = "Steel Dagger";
+                break;
+            case 6:
+                item = "Shovel";
+                break;
+            case 7:
+                item = "Diamond Sword";
+                break;
+            case 8:
+                item = "Axe";
+                break;
+            case 9:
+                item = "Axe";
+                break;
             default:
-                item = "Trash";
+                item = "Health Potion";
                 break;
         }
 
@@ -373,25 +388,27 @@ public class MainController extends Application {
             public void handle(ActionEvent event) {
                 Menu inventory = (Menu) event.getSource();
                 for (MenuItem item : inventory.getItems()) {
-                    item.setOnAction(inventoryHelper());
+                    item.setOnAction(inventoryHelper(inventory));
                 }
             }
         };
     }
 
-    private EventHandler<ActionEvent> inventoryHelper() {
+    private EventHandler<ActionEvent> inventoryHelper(Menu inventory) {
         return new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
                 MenuItem item = (MenuItem) event.getSource();
                 String itemStr = item.getText();
                 if ("health potion".equalsIgnoreCase(itemStr)) {
-                    consumeHealthPotion();
-                    System.out.println("Consumed Potion.\nHealth restored");
-                } else if ("dagger".equalsIgnoreCase(itemStr)) {
-                    System.out.println("Dagger equiped.");
-                } else if ("steel dagger".equalsIgnoreCase(itemStr)) {
-                    System.out.println("Steel Dagger equiped.");
+                    consumeHealthPotion(inventory, item);
+                    System.out.println("Consumed Health Potion.\nHealth restored");
+                } else if ("attack potion".equalsIgnoreCase(itemStr)) {
+                    consumeAttackPotion(inventory, item);
+                    System.out.println("Consumed Attack Potion.\nAttack buffed.");
+                } else {
+                    equipWeapon(itemStr);
+                    System.out.println(itemStr + " equiped.");
                 }
             }
         };
@@ -509,12 +526,17 @@ public class MainController extends Application {
     }
 
     private void attackSnakeHelper(RoomController room) {
-        room.dealDamage(gameModel.getAttackValue());
+        int attack = gameModel.getAttackValue();
+        if (gameModel.getAttackPotionActive() > 0) {
+            attack += 5;
+            gameModel.decrementAttackPotion();
+        }
+        room.dealDamage(attack);
         Text health = room.getEnterHealth();
         health.setText(gameModel.dealDamage(1) + " Health");
     }
 
-    private void consumeHealthPotion() {
+    private void consumeHealthPotion(Menu inventory, MenuItem potion) {
         RoomController roomController = getGameModel().getMaze().getTail().getData();
         int currentHealth = gameModel.getHealth();
         int newHealth = currentHealth + 10;
@@ -525,6 +547,27 @@ public class MainController extends Application {
         roomController.setMenuMessage(gameModel.getFarmerName() + " : Player health restored.");
         Text health = roomController.getEnterHealth();
         health.setText(gameModel.getHealth() + " Health");
+
+        inventory.getItems().remove(potion);
+        gameModel.getInventoryString().remove(potion.getText());
+        roomController.setPlayerMenu(inventory);
+    }
+
+    private void consumeAttackPotion(Menu inventory, MenuItem potion) {
+        RoomController roomController = getGameModel().getMaze().getTail().getData();
+        gameModel.setAttackPotionActive(5);
+        System.out.println(gameModel.getAttackPotionActive());
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : Player attack buffed for 5 attacks.");
+
+        inventory.getItems().remove(potion);
+        gameModel.getInventoryString().remove(potion.getText());
+        roomController.setPlayerMenu(inventory);
+    }
+
+    private void equipWeapon(String newWeapon) {
+        RoomController roomController = getGameModel().getMaze().getTail().getData();
+        gameModel.changeWeapon(newWeapon);
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : " + newWeapon + " equiped.");
     }
 
     /* MainController getter & setter functions */
