@@ -3,7 +3,7 @@ package game.controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import java.util.Random;
@@ -39,6 +39,9 @@ public class RoomController {
     @FXML
     private AnchorPane snakePane;
 
+    @FXML
+    private MenuBar menuBar;
+
     private Scene scene;
     private int height;
     private int width;
@@ -59,6 +62,7 @@ public class RoomController {
         this.snakePane = (AnchorPane) scene.lookup("#snakePane");
         this.isStart = false;
         this.enterHealth = (Text) scene.lookup("#enterHealth");
+        this.menuBar = (MenuBar) scene.lookup("#menuBar");
         this.initDoors();
     }
 
@@ -71,6 +75,7 @@ public class RoomController {
         this.goBack = (Button) scene.lookup("#goBack");
         this.snakePane = (AnchorPane) scene.lookup("#snakePane");
         this.enterHealth = (Text) scene.lookup("#enterHealth");
+        this.menuBar = (MenuBar) scene.lookup("#menuBar");
         this.isStart = true;
         this.initDoors();
     }
@@ -133,6 +138,26 @@ public class RoomController {
 
     public AnchorPane getSnakePane() {
         return snakePane;
+    }
+
+    public MenuBar getMenuBar() {
+        return this.menuBar;
+    }
+
+    public Menu getPlayerMenu() {
+        return this.menuBar.getMenus().get(0);
+    }
+
+    public void setMenuMessage(String message) {
+        if (this.menuBar.getMenus().size() > 1) {
+            this.menuBar.getMenus().remove(1);
+        }
+        this.menuBar.getMenus().add(new Menu(message));
+    }
+
+    public void setPlayerMenu(Menu inventory) {
+        this.menuBar.getMenus().remove(0);
+        this.menuBar.getMenus().add(0, inventory);
     }
 
     public void dealDamage(int attack) {

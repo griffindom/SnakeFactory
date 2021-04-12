@@ -2,15 +2,18 @@ package game.controllers;
 
 import game.support.GameModel;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -108,6 +111,8 @@ public class MainController extends Application {
         Button door4 = roomController.getDoor4();
         Button goBack = roomController.getGoBack();
         Button snake = roomController.getSnake();
+        roomController.setPlayerMenu(buildInventory(gameModel.getInventoryString()));
+        Menu inventory = roomController.getPlayerMenu();
         AnchorPane snakePane = roomController.getSnakePane();
         AtomicBoolean snakeDead = new AtomicBoolean(false);
 
@@ -133,6 +138,11 @@ public class MainController extends Application {
                 if (roomController.getSnakeHealth() <= 0) {
                     snakePane.getChildren().remove(snake);
                     snakeDead.set(true);
+                    String droppedItem = dropItem(roomController);
+
+                    // TODO: Add handler and button for dropped item
+                    // Currently adds automatically
+                    addItem(roomController, inventory, droppedItem);
 
                     if (true) {
                         door1.setOnAction(m -> {
@@ -299,11 +309,93 @@ public class MainController extends Application {
             }
         });
 
+
+        inventory.setOnAction(inventoryInteraction());
+
+
         mainWindow.setScene(scene);
         mainWindow.show();
     }
 
     /* MainController helper functions */
+
+    private Menu buildInventory(ArrayList<String> inventoryString) {
+        Menu inventory = new Menu("Inventory");
+        for (String itemStr: inventoryString) {
+            MenuItem item = new MenuItem(itemStr);
+            inventory.getItems().add(item);
+        }
+        return inventory;
+    }
+
+    private void addItem(RoomController roomController, Menu inventory, String item) {
+        inventory.getItems().add(new MenuItem(item));
+        gameModel.getInventoryString().add(item);
+        roomController.setPlayerMenu(inventory);
+        String mess = gameModel.getFarmerName() + ": " + item + " added to inventory.";
+        roomController.setMenuMessage(mess);
+    }
+
+    private String dropItem(RoomController roomController) {
+        String item;
+        Random rand = new Random();
+        int num = rand.nextInt(4);
+        switch (num) {
+            case 0:
+                item = "Health Potion";
+                break;
+            case 1:
+                item = "Attack Potion";
+                break;
+            case 2:
+                item = "Dagger";
+                break;
+            case 3:
+                item = "Shovel";
+                break;
+            case 4:
+                item = "Bow";
+                break;
+            default:
+                item = "Trash";
+                break;
+        }
+
+        String message = "Snake Dungeon: " + item + " dropped from enemy";
+        roomController.setMenuMessage(message);
+
+        return item;
+    }
+
+    private EventHandler<ActionEvent> inventoryInteraction() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                Menu inventory = (Menu) event.getSource();
+                for (MenuItem item : inventory.getItems()) {
+                    item.setOnAction(inventoryHelper());
+                }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> inventoryHelper() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                MenuItem item = (MenuItem) event.getSource();
+                String itemStr = item.getText();
+                if ("health potion".equalsIgnoreCase(itemStr)) {
+                    consumeHealthPotion();
+                    System.out.println("Consumed Potion.\nHealth restored");
+                } else if ("dagger".equalsIgnoreCase(itemStr)) {
+                    System.out.println("Dagger equiped.");
+                } else if ("steel dagger".equalsIgnoreCase(itemStr)) {
+                    System.out.println("Steel Dagger equiped.");
+                }
+            }
+        };
+    }
 
     private String difficultySliderHelper(double value) {
         int test = (int) value / 25;
@@ -420,6 +512,19 @@ public class MainController extends Application {
         room.dealDamage(gameModel.getAttackValue());
         Text health = room.getEnterHealth();
         health.setText(gameModel.dealDamage(1) + " Health");
+    }
+
+    private void consumeHealthPotion() {
+        RoomController roomController = getGameModel().getMaze().getTail().getData();
+        int currentHealth = gameModel.getHealth();
+        int newHealth = currentHealth + 10;
+        if (newHealth > 100) {
+            newHealth = newHealth + (100 - newHealth);
+        }
+        gameModel.setHealth(newHealth);
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : Player health restored.");
+        Text health = roomController.getEnterHealth();
+        health.setText(gameModel.getHealth() + " Health");
     }
 
     /* MainController getter & setter functions */

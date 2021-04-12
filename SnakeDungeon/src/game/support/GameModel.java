@@ -2,6 +2,8 @@ package game.support;
 
 import game.controllers.RoomController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class GameModel {
@@ -14,6 +16,7 @@ public class GameModel {
     private int health;
     private int minAttack;
     private int maxAttack;
+    private ArrayList<String> inventoryString;
 
     public GameModel() {
 
@@ -27,7 +30,12 @@ public class GameModel {
         this.totalGold = totalGold;
         this.maze = null;
         this.health = health;
+        this.inventoryString = new ArrayList<>(Arrays.asList(startingWeapon, "Potion"));
         initAttackValues(startingWeapon);
+    }
+
+    public ArrayList<String> getInventoryString() {
+        return this.inventoryString;
     }
 
     public void setFarmerName(String farmerName) {
