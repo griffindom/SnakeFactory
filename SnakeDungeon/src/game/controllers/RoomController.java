@@ -162,6 +162,7 @@ public class RoomController {
 
     public void dealDamage(int attack) {
         this.snakeHealth -= attack;
+        System.out.println("Dealt " + attack + " damage to snake.");
         System.out.println("Snake now has " + snakeHealth + " health.");
     }
 
