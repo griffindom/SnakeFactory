@@ -225,5 +225,112 @@ public class InventoryTest extends ApplicationTest {
             clickOn("#door1");
         }
     }
+    
+    @Test
+    public void testShovelDamage() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testShovelDamage");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        boolean found = false;
+        while (!found) {
+            for (int i = 0; i < 9; i++) {
+                RoomController room = controller.getGameModel().getMaze().getTail().getData();
+                GameModel gameModel = controller.getGameModel();
+                Scene scene = room.getScene();
+                Button snake = (Button) scene.lookup("#snake");
+                while (snake != null) {
+                    clickOn("#snake");
+                    snake = (Button) scene.lookup("#snake");
+                }
+                clickOn("#droppedItem");
+                Menu inventory = room.getPlayerMenu();
+                inventory.setId("inventory");
+                for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
+                    MenuItem item = inventory.getItems().get(j);
+                    if (item.getText().equalsIgnoreCase("shovel")) {
+                        found = true;
+                        if (i == 8) {
+                            break;
+                        }
+                        item.setId("item");
+                        clickOn("#inventory").clickOn("#item");
+                        for (int currRoom = i; currRoom >= 0; currRoom--) {
+                            clickOn("#goBack");
+                        }
+                        clickOn("#door2");
+                        room = controller.getGameModel().getMaze().getTail().getData();
+                        scene = room.getScene();
+                        snake = (Button) scene.lookup("#snake");
+                        clickOn("#snake");
+                        int damage = gameModel.getAttackValue();
+                        assertTrue("Error, damage is too low", damage >= 1);
+                        assertTrue("Error, damage is too high", damage <= 3);
+
+                    }
+                } if (found) {
+                    break;
+                }
+                clickOn("#door1");
+            }
+            found = true;
+            System.out.println("No shovel spawned this game. Run the test again");
+        }
+    }
+    
+        @Test
+    public void testArmor() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testArmor");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        boolean found = false;
+        while (!found) {
+            for (int i = 0; i < 9; i++) {
+                RoomController room = controller.getGameModel().getMaze().getTail().getData();
+                Scene scene = room.getScene();
+                Button snake = (Button) scene.lookup("#snake");
+                while (snake != null) {
+                    clickOn("#snake");
+                    snake = (Button) scene.lookup("#snake");
+                }
+                clickOn("#droppedItem");
+                Menu inventory = room.getPlayerMenu();
+                inventory.setId("inventory");
+                for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
+                    MenuItem item = inventory.getItems().get(j);
+                    if (item.getText().equalsIgnoreCase("armor")) {
+                        found = true;
+                        if (i == 8) {
+                            break;
+                        }
+                        int oldHealth = controller.getGameModel().getHealth();
+                        item.setId("item");
+                        clickOn("#inventory").clickOn("#item");
+                        for (int currRoom = i; currRoom >= 0; currRoom--) {
+                            clickOn("#goBack");
+                        }
+                        clickOn("#door2");
+                        room = controller.getGameModel().getMaze().getTail().getData();
+                        scene = room.getScene();
+                        snake = (Button) scene.lookup("#snake");
+                        clickOn("#snake");
+                        int newHealth = controller.getGameModel().getHealth();
+                        assertEquals(oldHealth, newHealth);
+                    }
+                } if (found) {
+                    break;
+                }
+                clickOn("#door1");
+            }
+            found = true;
+            System.out.println("No armor spawned this game. Run the test again");
+        }
+    }
+
 
 }
