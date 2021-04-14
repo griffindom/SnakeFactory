@@ -65,6 +65,7 @@ public class InventoryTest extends ApplicationTest {
         }
     }
     
+    @Test
     public void testItemAdded() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
