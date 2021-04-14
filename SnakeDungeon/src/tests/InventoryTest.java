@@ -136,5 +136,36 @@ public class InventoryTest extends ApplicationTest {
             clickOn("#door1");
         }
     }
+    
+    @Test
+    public void testAttackPotion() throws Exception{
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testHealthPotion");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        for (int i = 0; i < 9; i++) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#droppedItem");
+            Menu inventory = room.getPlayerMenu();
+            inventory.setId("inventory");
+            for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
+                MenuItem item = inventory.getItems().get(j);
+                if (item.getText().equalsIgnoreCase("attack potion")) {
+                    clickOn("#item");
+                    int temp = controller.getGameModel().getAttackPotionActive();
+                    assertNotEquals(0, temp);
+                }
+            }
+            clickOn("#door1");
+        }
+    }
 
 }
