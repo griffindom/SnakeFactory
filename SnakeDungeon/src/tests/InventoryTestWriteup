@@ -3,7 +3,9 @@ players health is restored after consuming a health potion. testStartingWeapon t
 in the inventory.
 
 
-Sydney Hahn:
+Sydney Hahn: I created 2 tests, testAttackPotion and testItemAdded. testAttackPotion tests to ensure that the attack potion
+increases a players damage dealt accordingly. testItemAdded tests to ensure that an item is dropped every time a snake is
+defeated.
 
 
 William McLanahan: I created 2 tests, testInventoryThere and testDroppedItemThere. The first test ensures the inventory
