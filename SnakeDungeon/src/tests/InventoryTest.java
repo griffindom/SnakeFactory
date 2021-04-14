@@ -5,13 +5,16 @@ import game.controllers.RoomController;
 import game.support.GameModel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
-import org.testfx.matcher.base.NodeMatchers;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
 
 public class InventoryTest extends ApplicationTest {
 
@@ -88,7 +91,7 @@ public class InventoryTest extends ApplicationTest {
     }
     
     @Test
-    public void testStartingWeapon() throws Exception{
+    public void testStartingWeapon() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("testStaringWeapon");
@@ -101,7 +104,7 @@ public class InventoryTest extends ApplicationTest {
     }
 
     @Test
-    public void testHealthPotion() throws Exception{
+    public void testHealthPotion() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("testHealthPotion");
@@ -162,7 +165,7 @@ public class InventoryTest extends ApplicationTest {
     }
     
     @Test
-    public void useMulitpleItems() throws Exception{
+    public void useMulitpleItems() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("Multiple");
@@ -192,7 +195,7 @@ public class InventoryTest extends ApplicationTest {
     }
 
     @Test
-    public void testAttackPotion() throws Exception{
+    public void testAttackPotion() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");
         write("testHealthPotion");
@@ -211,15 +214,14 @@ public class InventoryTest extends ApplicationTest {
             Menu inventory = room.getPlayerMenu();
             inventory.setId("inventory");
             for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
-                MenuItem item = ((Menu) inventory).getItems().get(j);
+                MenuItem item = inventory.getItems().get(j);
                 if (item.getText().equalsIgnoreCase("attack potion")) {
                     int oldAttackPotion = controller.getGameModel().getAttackPotionActive();
-                    System.out.println("Old: " + oldAttackPotion);
                     item.setId("item");
                     clickOn("#inventory").clickOn("#item");
-                    int temp = controller.getGameModel().getAttackPotionActive();
-                    System.out.println("New "+ temp);
-                    assertEquals(oldAttackPotion + 5, temp);
+                    System.out.println(controller.getGameModel().getAttackPotionActive());
+                    assertEquals(oldAttackPotion + 5,
+                            controller.getGameModel().getAttackPotionActive());
                 }
             }
             clickOn("#door1");
@@ -280,7 +282,7 @@ public class InventoryTest extends ApplicationTest {
         }
     }
     
-        @Test
+    @Test
     public void testArmor() throws Exception {
         clickOn("#startButton");
         clickOn("#farmerName");

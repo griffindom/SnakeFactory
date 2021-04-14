@@ -1,0 +1,21 @@
+Griffin Dominguez: I created 2 tests, testHealthPotion and testStartingWeapon. testHealthPotion tests to make sure that the
+players health is restored after consuming a health potion. testStartingWeapon tests to make sure that the starting weapon shows
+in the inventory.
+
+
+Sydney Hahn: I created 2 tests, testAttackPotion and testItemAdded. testAttackPotion tests to ensure that the attack potion
+increases a players damage dealt accordingly. testItemAdded tests to ensure that an item is dropped every time a snake is
+defeated.
+
+
+William McLanahan: I created 2 tests, testInventoryThere and testDroppedItemThere. The first test ensures the inventory
+is present when in a room. The second test ensures that an item is always dropped after slaying a snake.
+
+
+James Sherman: I created testArmor and testShovelDamage. The first test tests to see if armor works. The second test
+is a test to check the functionality of a pickup weapon, the shovel. 
+
+Jasper Pilkenton: I created useMultipleItems() and testItemsStays(). The first of which tests to see if the player can use/consume
+more than 1 item at a time (E.g. equipping a new weapon and consuming a potion one after another). The second tests that an item will stay 
+in the room after the player leaves (given the player has not picked the item up) and that the player can subsequently go-back to the room 
+and pick up the item. 

@@ -140,41 +140,41 @@ public class GameModel {
 
     public void changeWeapon(String newWeapon) {
         switch (newWeapon) {
-            case "Long Sword":
-                this.minAttack = 5;
-                this.maxAttack = 11;
-                break;
-            case "Mace":
-                this.minAttack = 7;
-                this.maxAttack = 9;
-                break;
-            case "Dagger":
-                this.minAttack = 2;
-                this.maxAttack = 4;
-                break;
-            case "Shovel":
-                this.minAttack = 1;
-                this.maxAttack = 3;
-                break;
-            case "Steel Dagger":
-                this.minAttack = 4;
-                this.maxAttack = 6;
-                break;
-            case "Diamond Sword":
-                this.minAttack = 11;
-                this.maxAttack = 14;
-                break;
-            case "Bow":
-                this.minAttack = 1;
-                this.maxAttack = 7;
-                break;
-            case "Axe":
-                this.minAttack = 6;
-                this.maxAttack = 9;
-                break;
-            default:
-                System.out.println("ERROR: Weapon not found.");
-                break;
+        case "Long Sword":
+            this.minAttack = 5;
+            this.maxAttack = 11;
+            break;
+        case "Mace":
+            this.minAttack = 7;
+            this.maxAttack = 9;
+            break;
+        case "Dagger":
+            this.minAttack = 2;
+            this.maxAttack = 4;
+            break;
+        case "Shovel":
+            this.minAttack = 1;
+            this.maxAttack = 3;
+            break;
+        case "Steel Dagger":
+            this.minAttack = 4;
+            this.maxAttack = 6;
+            break;
+        case "Diamond Sword":
+            this.minAttack = 11;
+            this.maxAttack = 14;
+            break;
+        case "Bow":
+            this.minAttack = 1;
+            this.maxAttack = 7;
+            break;
+        case "Axe":
+            this.minAttack = 6;
+            this.maxAttack = 9;
+            break;
+        default:
+            System.out.println("ERROR: Weapon not found.");
+            break;
         }
     }
 

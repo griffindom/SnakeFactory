@@ -151,76 +151,16 @@ public class MainController extends Application {
                     });
 
                     if (true) {
-                        door1.setOnAction(m -> {
-                            RoomController room = goThroughDoor1Helper();
-                            if (room == null) {
-                                try {
-                                    goToFinalScreen();
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            } else {
-                                try {
-                                    goToRoom(room);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            }
-                        });
+                        door1.setOnAction(door1Action());
                     }
                     if (door2 != null) {
-                        door2.setOnAction(m -> {
-                            RoomController room = goThroughDoor2Helper();
-                            if (room == null) {
-                                try {
-                                    goToFinalScreen();
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            } else {
-                                try {
-                                    goToRoom(room);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            }
-                        });
+                        door2.setOnAction(door2Action());
                     }
                     if (door3 != null) {
-                        door3.setOnAction(m -> {
-                            RoomController room = goThroughDoor3Helper();
-                            if (room == null) {
-                                try {
-                                    goToFinalScreen();
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            } else {
-                                try {
-                                    goToRoom(room);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            }
-                        });
+                        door3.setOnAction(door3Action());
                     }
                     if (door4 != null) {
-                        door4.setOnAction(m -> {
-                            RoomController room = goThroughDoor4Helper();
-                            if (room == null) {
-                                try {
-                                    goToFinalScreen();
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            } else {
-                                try {
-                                    goToRoom(room);
-                                } catch (Exception exception) {
-                                    exception.printStackTrace();
-                                }
-                            }
-                        });
+                        door4.setOnAction(door4Action());
                     }
                 }
             });
@@ -229,79 +169,19 @@ public class MainController extends Application {
         /* Walk through doors mechanism */
 
         if (snakeDead.get() || roomController.getIsStart()) {
-            door1.setOnAction(e -> {
-                RoomController room = goThroughDoor1Helper();
-                if (room == null) {
-                    try {
-                        goToFinalScreen();
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                } else {
-                    try {
-                        goToRoom(room);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+            door1.setOnAction(door1Action());
         }
 
         if (door2 != null && (snakeDead.get() || roomController.getIsStart())) {
-            door2.setOnAction(e -> {
-                RoomController room = goThroughDoor2Helper();
-                if (room == null) {
-                    try {
-                        goToFinalScreen();
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                } else {
-                    try {
-                        goToRoom(room);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+            door2.setOnAction(door2Action());
         }
 
         if (door3 != null && (snakeDead.get() || roomController.getIsStart())) {
-            door3.setOnAction(e -> {
-                RoomController room = goThroughDoor3Helper();
-                if (room == null) {
-                    try {
-                        goToFinalScreen();
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                } else {
-                    try {
-                        goToRoom(room);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+            door3.setOnAction(door3Action());
         }
 
         if (door4 != null && (snakeDead.get() || roomController.getIsStart())) {
-            door4.setOnAction(e -> {
-                RoomController room = goThroughDoor4Helper();
-                if (room == null) {
-                    try {
-                        goToFinalScreen();
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                } else {
-                    try {
-                        goToRoom(room);
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            });
+            door4.setOnAction(door4Action());
         }
 
         goBack.setOnAction(e -> {
@@ -342,39 +222,39 @@ public class MainController extends Application {
         Random rand = new Random();
         int num = rand.nextInt(13);
         switch (num) {
-            case 0:
-                item = "Attack Potion";
-                break;
-            case 1:
-                item = "Attack Potion";
-                break;
-            case 2:
-                item = "Attack Potion";
-                break;
-            case 3:
-                item = "Shovel";
-                break;
-            case 4:
-                item = "Bow";
-                break;
-            case 5:
-                item = "Steel Dagger";
-                break;
-            case 6:
-                item = "Shovel";
-                break;
-            case 7:
-                item = "Diamond Sword";
-                break;
-            case 8:
-                item = "Axe";
-                break;
-            case 9:
-                item = "Armor";
-                break;
-            default:
-                item = "Health Potion";
-                break;
+        case 0:
+            item = "Attack Potion";
+            break;
+        case 1:
+            item = "Attack Potion";
+            break;
+        case 2:
+            item = "Attack Potion";
+            break;
+        case 3:
+            item = "Shovel";
+            break;
+        case 4:
+            item = "Bow";
+            break;
+        case 5:
+            item = "Steel Dagger";
+            break;
+        case 6:
+            item = "Shovel";
+            break;
+        case 7:
+            item = "Diamond Sword";
+            break;
+        case 8:
+            item = "Axe";
+            break;
+        case 9:
+            item = "Armor";
+            break;
+        default:
+            item = "Health Potion";
+            break;
         }
 
         String message = "Snake Dungeon: " + item + " dropped from enemy";
@@ -390,6 +270,94 @@ public class MainController extends Application {
                 Menu inventory = (Menu) event.getSource();
                 for (MenuItem item : inventory.getItems()) {
                     item.setOnAction(inventoryHelper(inventory));
+                }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> door1Action() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                RoomController room = goThroughDoor1Helper();
+                if (room == null) {
+                    try {
+                        goToFinalScreen();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    try {
+                        goToRoom(room);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> door2Action() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                RoomController room = goThroughDoor2Helper();
+                if (room == null) {
+                    try {
+                        goToFinalScreen();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    try {
+                        goToRoom(room);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> door3Action() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                RoomController room = goThroughDoor3Helper();
+                if (room == null) {
+                    try {
+                        goToFinalScreen();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    try {
+                        goToRoom(room);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> door4Action() {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                RoomController room = goThroughDoor4Helper();
+                if (room == null) {
+                    try {
+                        goToFinalScreen();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                } else {
+                    try {
+                        goToRoom(room);
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
                 }
             }
         };
@@ -536,9 +504,6 @@ public class MainController extends Application {
             gameModel.decrementAttackPotion();
         }
         room.dealDamage(attack);
-        if (room.getSnakeHealth() < 0) {
-            room.setSnakeHealth(0);
-        }
         Text health = room.getEnterHealth();
         int damage = 1;
         if (gameModel.getArmorActive() > 0) {
@@ -566,9 +531,10 @@ public class MainController extends Application {
     }
 
     private void consumeAttackPotion(Menu inventory, MenuItem potion) {
+        gameModel.setAttackPotionActive(5);
         RoomController roomController = getGameModel().getMaze().getTail().getData();
-        System.out.println(gameModel.getAttackPotionActive());
-        roomController.setMenuMessage(gameModel.getFarmerName() + " : Attack buffed for 5 attacks.");
+        roomController.setMenuMessage(gameModel.getFarmerName()
+                + " : Attack buffed for 5 attacks.");
 
         inventory.getItems().remove(potion);
         gameModel.getInventoryString().remove(potion.getText());
@@ -578,7 +544,8 @@ public class MainController extends Application {
     private void equipArmor(Menu inventory, MenuItem armor) {
         RoomController roomController = getGameModel().getMaze().getTail().getData();
         gameModel.setArmorActive(5);
-        roomController.setMenuMessage(gameModel.getFarmerName() + " : Defense increased for 5 attacks.");
+        roomController.setMenuMessage(gameModel.getFarmerName()
+                + " : Defense increased for 5 attacks.");
 
         inventory.getItems().remove(armor);
         gameModel.getInventoryString().remove(armor.getText());
