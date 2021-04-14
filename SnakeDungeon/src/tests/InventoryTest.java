@@ -138,6 +138,30 @@ public class InventoryTest extends ApplicationTest {
     }
     
     @Test
+    public void testItemStays() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("LostItem");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        for (int i = 0; i < 2; i++) {
+            clickOn("#door1");
+            GameModel gameModel = controller.getGameModel();
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null && gameModel.getHealth() > 0) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+        }
+        clickOn("#door1");
+        clickOn("#goBack");
+        System.out.println("goin back");
+        clickOn("#droppedItem");
+    }
+
+    @Test
     public void testAttackPotion() throws Exception{
         clickOn("#startButton");
         clickOn("#farmerName");
@@ -157,11 +181,15 @@ public class InventoryTest extends ApplicationTest {
             Menu inventory = room.getPlayerMenu();
             inventory.setId("inventory");
             for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
-                MenuItem item = inventory.getItems().get(j);
+                MenuItem item = ((Menu) inventory).getItems().get(j);
                 if (item.getText().equalsIgnoreCase("attack potion")) {
-                    clickOn("#item");
+                    int oldAttackPotion = controller.getGameModel().getAttackPotionActive();
+                    System.out.println("Old: " + oldAttackPotion);
+                    item.setId("item");
+                    clickOn("#inventory").clickOn("#item");
                     int temp = controller.getGameModel().getAttackPotionActive();
-                    assertNotEquals(0, temp);
+                    System.out.println("New "+ temp);
+                    assertEquals(oldAttackPotion + 5, temp);
                 }
             }
             clickOn("#door1");
