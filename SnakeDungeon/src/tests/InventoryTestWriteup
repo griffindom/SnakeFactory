@@ -4,7 +4,8 @@ Griffin Dominguez:
 Sydney Hahn:
 
 
-William McLanahan:
+William McLanahan: I created 2 tests, testInventoryThere and testDroppedItemThere. The first test ensures the inventory
+is present when in a room. The second test ensures that an item is always dropped after slaying a snake.
 
 
 James Sherman:
