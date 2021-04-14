@@ -16,5 +16,7 @@ James Sherman: I created testArmor and testInventoryNotCarriedOver. The first te
 test tests to see if once a player dies the inventory is not carried over into the next game. 
 
 
-Jasper Pilkenton:
-
+Jasper Pilkenton: I created useMultipleItems() and testItemsStays(). The first of which tests to see if the player can use/consume
+more than 1 item at a time (E.g. equipping a new weapon and consuming a potion one after another). The second tests that an item will stay 
+in the room after the player leaves (given the player has not picked the item up) and that the player can subsequently go-back to the room 
+and pick up the item. 
