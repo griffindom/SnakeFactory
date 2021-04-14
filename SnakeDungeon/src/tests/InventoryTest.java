@@ -86,5 +86,55 @@ public class InventoryTest extends ApplicationTest {
         }
         assertEquals(10, controller.getGameModel().getInventoryString().size());
     }
+    
+    @Test
+    public void testStartingWeapon() throws Exception{
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testStaringWeapon");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        GameModel gameModel = controller.getGameModel();
+        ArrayList<String> testInventory = new ArrayList<>(Arrays.asList("Dagger"));
+        assertEquals(testInventory, gameModel.getInventoryString());
+    }
+
+    @Test
+    public void testHealthPotion() throws Exception{
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testHealthPotion");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        for (int i = 0; i < 9; i++) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#droppedItem");
+            Menu inventory = room.getPlayerMenu();
+            inventory.setId("inventory");
+            for (int j = 0; j < room.getPlayerMenu().getItems().size(); j++) {
+                MenuItem item = inventory.getItems().get(j);
+                if (item.getText().equalsIgnoreCase("health potion")) {
+                    int oldHealth = controller.getGameModel().getHealth();
+                    item.setId("item");
+                    clickOn("#inventory").clickOn("#item");
+                    if (oldHealth <= 90) {
+                        assertEquals(oldHealth + 10, controller.getGameModel().getHealth());
+                    } else {
+
+                        assertEquals(100, controller.getGameModel().getHealth());
+                    }
+                }
+            }
+            clickOn("#door1");
+        }
+    }
 
 }
