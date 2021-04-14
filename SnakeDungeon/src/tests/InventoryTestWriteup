@@ -1,4 +1,6 @@
-Griffin Dominguez:
+Griffin Dominguez: I created 2 tests, testHealthPotion and testStartingWeapon. testHealthPotion tests to make sure that the
+players health is restored after consuming a health potion. testStartingWeapon tests to make sure that the starting weapon shows
+in the inventory.
 
 
 Sydney Hahn:
