@@ -142,6 +142,7 @@ public class MainController extends Application {
                     snakeDead.set(false);
                     String droppedItem = dropItem(roomController);
                     Button newItem = new Button(droppedItem);
+                    newItem.setId("droppedItem");
                     snakePane.getChildren().add(newItem);
 
                     newItem.setOnAction(i -> {
