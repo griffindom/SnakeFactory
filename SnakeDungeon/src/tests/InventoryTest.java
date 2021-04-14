@@ -64,6 +64,26 @@ public class InventoryTest extends ApplicationTest {
             clickOn("#door1");
         }
     }
-
+    
+    public void testItemAdded() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        for (int i = 0; i < 9; i++) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#droppedItem");
+            clickOn("#door1");
+        }
+        assertEquals(10, controller.getGameModel().getInventoryString().size());
+    }
 
 }
