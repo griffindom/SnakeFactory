@@ -17,6 +17,7 @@ public class GameModel {
     private int minAttack;
     private int maxAttack;
     private int attackPotionActive;
+    private int armorActive;
     private ArrayList<String> inventoryString;
 
     public GameModel() {
@@ -93,6 +94,18 @@ public class GameModel {
 
     public void decrementAttackPotion() {
         this.attackPotionActive--;
+    }
+
+    public int getArmorActive() {
+        return this.armorActive;
+    }
+
+    public void setArmorActive(int clicks) {
+        this.armorActive += clicks;
+    }
+
+    public void decrementArmor() {
+        this.armorActive--;
     }
 
     public int dealDamage(int value) {

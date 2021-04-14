@@ -127,7 +127,9 @@ public class MainController extends Application {
 
         if (!roomController.getIsStart()) {
             snake.setOnAction(e -> {
-                attackSnakeHelper(roomController);
+                if (roomController.getSnakeHealth() > 0) {
+                    attackSnakeHelper(roomController);
+                }
                 if (gameModel.getHealth() <= 0) {
                     try {
                         goToConfigScreen();
@@ -137,12 +139,15 @@ public class MainController extends Application {
                 }
                 if (roomController.getSnakeHealth() <= 0) {
                     snakePane.getChildren().remove(snake);
-                    snakeDead.set(true);
+                    snakeDead.set(false);
                     String droppedItem = dropItem(roomController);
+                    Button newItem = new Button(droppedItem);
+                    snakePane.getChildren().add(newItem);
 
-                    // TODO: Add handler and button for dropped item
-                    // Currently adds automatically
-                    addItem(roomController, inventory, droppedItem);
+                    newItem.setOnAction(i -> {
+                        addItem(roomController, inventory, droppedItem);
+                        snakePane.getChildren().remove(newItem);
+                    });
 
                     if (true) {
                         door1.setOnAction(m -> {
@@ -162,7 +167,6 @@ public class MainController extends Application {
                             }
                         });
                     }
-
                     if (door2 != null) {
                         door2.setOnAction(m -> {
                             RoomController room = goThroughDoor2Helper();
@@ -181,7 +185,6 @@ public class MainController extends Application {
                             }
                         });
                     }
-
                     if (door3 != null) {
                         door3.setOnAction(m -> {
                             RoomController room = goThroughDoor3Helper();
@@ -200,7 +203,6 @@ public class MainController extends Application {
                             }
                         });
                     }
-
                     if (door4 != null) {
                         door4.setOnAction(m -> {
                             RoomController room = goThroughDoor4Helper();
@@ -309,9 +311,7 @@ public class MainController extends Application {
             }
         });
 
-
         inventory.setOnAction(inventoryInteraction());
-
 
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -369,7 +369,7 @@ public class MainController extends Application {
                 item = "Axe";
                 break;
             case 9:
-                item = "Axe";
+                item = "Armor";
                 break;
             default:
                 item = "Health Potion";
@@ -406,6 +406,9 @@ public class MainController extends Application {
                 } else if ("attack potion".equalsIgnoreCase(itemStr)) {
                     consumeAttackPotion(inventory, item);
                     System.out.println("Consumed Attack Potion.\nAttack buffed.");
+                } else if ("armor".equalsIgnoreCase(itemStr)) {
+                    equipArmor(inventory, item);
+                    System.out.println("Armor Equiped.\nDefense increased.");
                 } else {
                     equipWeapon(itemStr);
                     System.out.println(itemStr + " equiped.");
@@ -532,8 +535,16 @@ public class MainController extends Application {
             gameModel.decrementAttackPotion();
         }
         room.dealDamage(attack);
+        if (room.getSnakeHealth() < 0) {
+            room.setSnakeHealth(0);
+        }
         Text health = room.getEnterHealth();
-        health.setText(gameModel.dealDamage(1) + " Health");
+        int damage = 1;
+        if (gameModel.getArmorActive() > 0) {
+            damage = 0;
+            gameModel.decrementArmor();
+        }
+        health.setText(gameModel.dealDamage(damage) + " Health");
     }
 
     private void consumeHealthPotion(Menu inventory, MenuItem potion) {
@@ -544,7 +555,7 @@ public class MainController extends Application {
             newHealth = newHealth + (100 - newHealth);
         }
         gameModel.setHealth(newHealth);
-        roomController.setMenuMessage(gameModel.getFarmerName() + " : Player health restored.");
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : Health restored.");
         Text health = roomController.getEnterHealth();
         health.setText(gameModel.getHealth() + " Health");
 
@@ -555,12 +566,21 @@ public class MainController extends Application {
 
     private void consumeAttackPotion(Menu inventory, MenuItem potion) {
         RoomController roomController = getGameModel().getMaze().getTail().getData();
-        gameModel.setAttackPotionActive(5);
         System.out.println(gameModel.getAttackPotionActive());
-        roomController.setMenuMessage(gameModel.getFarmerName() + " : Player attack buffed for 5 attacks.");
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : Attack buffed for 5 attacks.");
 
         inventory.getItems().remove(potion);
         gameModel.getInventoryString().remove(potion.getText());
+        roomController.setPlayerMenu(inventory);
+    }
+
+    private void equipArmor(Menu inventory, MenuItem armor) {
+        RoomController roomController = getGameModel().getMaze().getTail().getData();
+        gameModel.setArmorActive(5);
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : Defense increased for 5 attacks.");
+
+        inventory.getItems().remove(armor);
+        gameModel.getInventoryString().remove(armor.getText());
         roomController.setPlayerMenu(inventory);
     }
 
