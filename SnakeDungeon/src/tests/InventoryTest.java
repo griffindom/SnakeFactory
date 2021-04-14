@@ -160,6 +160,36 @@ public class InventoryTest extends ApplicationTest {
         System.out.println("goin back");
         clickOn("#droppedItem");
     }
+    
+    @Test
+    public void useMulitpleItems() throws Exception{
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Multiple");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        for (int i = 0; i < 3; i++) {
+            clickOn("#door1");
+            GameModel gameModel = controller.getGameModel();
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null && gameModel.getHealth() > 0) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#droppedItem");
+        }
+        GameModel gameModel = controller.getGameModel();
+        RoomController room = controller.getGameModel().getMaze().getTail().getData();
+        for (int i = 1; i < 3; i++) {
+            Menu inventory = room.getPlayerMenu();
+            inventory.setId("inventory");
+            MenuItem item = inventory.getItems().get(i);
+            item.setId("item");
+            clickOn("#inventory").clickOn("#item");
+        }
+    }
 
     @Test
     public void testAttackPotion() throws Exception{
