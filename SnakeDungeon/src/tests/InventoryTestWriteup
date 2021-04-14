@@ -12,7 +12,8 @@ William McLanahan: I created 2 tests, testInventoryThere and testDroppedItemTher
 is present when in a room. The second test ensures that an item is always dropped after slaying a snake.
 
 
-James Sherman:
+James Sherman: I created testArmor and testInventoryNotCarriedOver. The first test tests to see if armor works. The second
+test tests to see if once a player dies the inventory is not carried over into the next game. 
 
 
 Jasper Pilkenton:
