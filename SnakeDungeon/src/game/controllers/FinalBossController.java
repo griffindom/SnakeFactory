@@ -43,7 +43,8 @@ public class FinalBossController {
     public FinalBossController(int width, int height) throws IOException {
         this.width = width;
         this.height = height;
-        this.scene = new Scene(FXMLLoader.load(getClass().getResource("/game/screens/FinalBoss.fxml")));
+        this.scene = new Scene(FXMLLoader.load(
+                getClass().getResource("/game/screens/FinalBoss.fxml")));
         this.enterGold = (Text) scene.lookup("#enterGold");
         this.snakePane = (AnchorPane) scene.lookup("#snakePane");
         this.snake = (Button) scene.lookup("#snake");

@@ -47,27 +47,28 @@
                   <Font name="Andale Mono" size="34.0" />
                </font>
             </Text>
-            <Text id="timeText" layoutX="84.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Time:" textAlignment="CENTER" wrappingWidth="254.5849609375">
+            <Text id="timeText" layoutX="132.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Time:" wrappingWidth="419.5849609375">
                <font>
                   <Font name="Andale Mono" size="22.0" />
                </font>
             </Text>
-            <Button id="restart" layoutX="293.0" layoutY="343.0" mnemonicParsing="false" text="Restart" />
+            <Button id="restart" layoutX="243.0" layoutY="343.0" mnemonicParsing="false" text="Restart" />
             <Text id="messageText" layoutX="203.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You escaped the Snake Dungeon!" textAlignment="CENTER" wrappingWidth="254.5849609375">
                <font>
                   <Font name="Andale Mono" size="22.0" />
                </font>
             </Text>
-            <Text id="killedText" layoutX="140.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Snakes Killed:" wrappingWidth="380.5849609375">
+            <Text id="killedText" layoutX="130.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Snakes Killed:" wrappingWidth="380.5849609375">
                <font>
                   <Font name="Andale Mono" size="22.0" />
                </font>
             </Text>
-            <Text id="damageText" layoutX="140.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Damage Dealt:" wrappingWidth="254.5849609375">
+            <Text id="damageText" layoutX="130.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Damage Dealt:" wrappingWidth="254.5849609375">
                <font>
                   <Font name="Andale Mono" size="22.0" />
                </font>
             </Text>
+            <Button id="quit" layoutX="342.0" layoutY="343.0" mnemonicParsing="false" text="Quit" />
       </children>
     </AnchorPane>
   </children>

@@ -2,17 +2,15 @@ package game.controllers;
 
 import game.support.GameModel;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -237,7 +235,7 @@ public class MainController extends Application {
         decline.setOnAction(e -> {
             try {
                 if (roomController == null) {
-                    goToFinalScreen(true);
+                    goToFinalBoss();
                 } else {
                     goToRoom(roomController);
                 }
@@ -252,20 +250,20 @@ public class MainController extends Application {
         snake4.setOnAction(challengeAttackHelper(challengeRoomController, 4));
 
         door.setOnAction(e -> {
-                try {
-                    if (challengeRoomController.allSnakeDead()) {
-                        if (roomController == null) {
-                            gameModel.setHealth(100);
-                            goToFinalBoss();
-                        } else {
-                            gameModel.setHealth(100);
-                            goToRoom(roomController);
-                        }
+            try {
+                if (challengeRoomController.allSnakeDead()) {
+                    if (roomController == null) {
+                        gameModel.setHealth(100);
+                        goToFinalBoss();
+                    } else {
+                        gameModel.setHealth(100);
+                        goToRoom(roomController);
                     }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
                 }
-            });
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
 
         inventory.setOnAction(inventoryInteraction());
 
@@ -277,6 +275,7 @@ public class MainController extends Application {
         EndGameController endGameController = new EndGameController();
         Scene scene = endGameController.getScene();
         Button restart = endGameController.getRestart();
+        Button quit = endGameController.getQuit();
         if (!win) {
             endGameController.setCongratsText();
             endGameController.setMessageText();
@@ -291,6 +290,10 @@ public class MainController extends Application {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
+        });
+
+        quit.setOnAction(m -> {
+            Platform.exit();
         });
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -532,7 +535,8 @@ public class MainController extends Application {
         };
     }
 
-    private EventHandler<ActionEvent> challengeAttackHelper(ChallengeRoomController room, int snake) {
+    private EventHandler<ActionEvent> challengeAttackHelper(
+            ChallengeRoomController room, int snake) {
         return new EventHandler<ActionEvent>() {
 
             public void handle(ActionEvent event) {
@@ -597,10 +601,10 @@ public class MainController extends Application {
                     System.out.println("Consumed Attack Potion.\nAttack buffed.");
                 } else if ("armor".equalsIgnoreCase(itemStr)) {
                     equipArmor(inventory, item);
-                    System.out.println("Armor Equiped.\nDefense increased.");
+                    System.out.println("Armor Equipped.\nDefense increased.");
                 } else {
                     equipWeapon(itemStr);
-                    System.out.println(itemStr + " equiped.");
+                    System.out.println(itemStr + " equipped.");
                 }
             }
         };
@@ -786,7 +790,7 @@ public class MainController extends Application {
     private void equipWeapon(String newWeapon) {
         RoomController roomController = getGameModel().getMaze().getTail().getData();
         gameModel.changeWeapon(newWeapon);
-        roomController.setMenuMessage(gameModel.getFarmerName() + " : " + newWeapon + " equiped.");
+        roomController.setMenuMessage(gameModel.getFarmerName() + " : " + newWeapon + " equipped.");
     }
 
     /* MainController getter & setter functions */
