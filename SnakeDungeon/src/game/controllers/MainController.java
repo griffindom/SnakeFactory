@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -98,7 +99,6 @@ public class MainController extends Application {
     }
 
     private void goToRoom(RoomController roomController) throws Exception {
-        System.out.println(roomController);
         Scene scene = roomController.getScene();
 
         System.out.println(gameModel.getMaze().getSize());
@@ -132,14 +132,15 @@ public class MainController extends Application {
                 }
                 if (gameModel.getHealth() <= 0) {
                     try {
-                        goToConfigScreen();
+                        goToFinalScreen(false);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
                 }
                 if (roomController.getSnakeHealth() <= 0) {
                     snakePane.getChildren().remove(snake);
-                    snakeDead.set(false);
+                    snakeDead.set(true);
+                    gameModel.addKill();
                     String droppedItem = dropItem(roomController);
                     Button newItem = new Button(droppedItem);
                     newItem.setId("droppedItem");
@@ -193,6 +194,150 @@ public class MainController extends Application {
         });
 
         inventory.setOnAction(inventoryInteraction());
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToChallengeRoom(RoomController roomController) throws Exception {
+        ChallengeRoomController challengeRoomController = new ChallengeRoomController(500, 500);
+        Scene scene = challengeRoomController.getScene();
+
+        Text gold = challengeRoomController.getEnterGold();
+        Text health = challengeRoomController.getEnterHealth();
+        Button door = challengeRoomController.getDoor();
+        Button snake1 = challengeRoomController.getSnake1();
+        Button snake2 = challengeRoomController.getSnake2();
+        Button snake3 = challengeRoomController.getSnake3();
+        Button snake4 = challengeRoomController.getSnake4();
+        Button accept = challengeRoomController.getAccept();
+        Button decline = challengeRoomController.getDecline();
+        challengeRoomController.setPlayerMenu(buildInventory(gameModel.getInventoryString()));
+        Menu inventory = challengeRoomController.getPlayerMenu();
+
+        gold.setText(gameModel.getTotalGold() + " Gold Coins");
+        health.setText(gameModel.getHealth() + " Health");
+
+        challengeRoomController.setMenuMessage("4 wild snakes have appeared.");
+
+        /* Walk through doors mechanism */
+
+
+
+        accept.setOnAction(e -> {
+            challengeRoomController.removeMenuMessage();
+            snake1.setVisible(true);
+            snake2.setVisible(true);
+            snake3.setVisible(true);
+            snake4.setVisible(true);
+            accept.setVisible(false);
+            decline.setVisible(false);
+        });
+
+        decline.setOnAction(e -> {
+            try {
+                if (roomController == null) {
+                    goToFinalScreen(true);
+                } else {
+                    goToRoom(roomController);
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        snake1.setOnAction(challengeAttackHelper(challengeRoomController, 1));
+        snake2.setOnAction(challengeAttackHelper(challengeRoomController, 2));
+        snake3.setOnAction(challengeAttackHelper(challengeRoomController, 3));
+        snake4.setOnAction(challengeAttackHelper(challengeRoomController, 4));
+
+        door.setOnAction(e -> {
+                try {
+                    if (challengeRoomController.allSnakeDead()) {
+                        if (roomController == null) {
+                            gameModel.setHealth(100);
+                            goToFinalBoss();
+                        } else {
+                            gameModel.setHealth(100);
+                            goToRoom(roomController);
+                        }
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            });
+
+        inventory.setOnAction(inventoryInteraction());
+
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToFinalScreen(boolean win) throws Exception {
+        EndGameController endGameController = new EndGameController();
+        Scene scene = endGameController.getScene();
+        Button restart = endGameController.getRestart();
+        if (!win) {
+            endGameController.setCongratsText();
+            endGameController.setMessageText();
+        }
+        endGameController.setTimeText(gameModel);
+        endGameController.setKilledText(gameModel);
+        endGameController.setDamageText(gameModel);
+
+        restart.setOnAction(e -> {
+            try {
+                initWelcomeScreen();
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToFinalBoss() throws Exception {
+        FinalBossController finalBossController = new FinalBossController(500, 500);
+        Scene scene = finalBossController.getScene();
+        Text gold = finalBossController.getEnterGold();
+        Text health = finalBossController.getEnterHealth();
+        Button door = finalBossController.getDoor();
+        Button snake = finalBossController.getSnake();
+        finalBossController.setPlayerMenu(buildInventory(gameModel.getInventoryString()));
+        Menu inventory = finalBossController.getPlayerMenu();
+        AnchorPane snakePane = finalBossController.getSnakePane();
+        AtomicBoolean snakeDead = new AtomicBoolean(false);
+
+        snake.setOnAction(e -> {
+            if (finalBossController.getSnakeHealth() > 0) {
+                attackFinalBossHelper(finalBossController);
+            }
+            if (gameModel.getHealth() <= 0) {
+                try {
+                    goToFinalScreen(false);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+            if (finalBossController.getSnakeHealth() <= 0) {
+                snakePane.getChildren().remove(snake);
+                snakeDead.set(true);
+                gameModel.addKill();
+            }
+        });
+
+        door.setOnAction(e -> {
+            if (snakeDead.get()) {
+                try {
+                    goToFinalScreen(true);
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        gold.setText(gameModel.getTotalGold() + " Gold Coins");
+        health.setText(gameModel.getHealth() + " Health");
 
         mainWindow.setScene(scene);
         mainWindow.show();
@@ -282,9 +427,15 @@ public class MainController extends Application {
                 RoomController room = goThroughDoor1Helper();
                 if (room == null) {
                     try {
-                        goToFinalScreen();
+                        goToChallengeRoom(null);
                     } catch (Exception exception) {
                         exception.printStackTrace();
+                    }
+                } else if (gameModel.getMaze().getSize() == 5) {
+                    try {
+                        goToChallengeRoom(room);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -304,9 +455,15 @@ public class MainController extends Application {
                 RoomController room = goThroughDoor2Helper();
                 if (room == null) {
                     try {
-                        goToFinalScreen();
+                        goToChallengeRoom(null);
                     } catch (Exception exception) {
                         exception.printStackTrace();
+                    }
+                } else if (gameModel.getMaze().getSize() == 5) {
+                    try {
+                        goToChallengeRoom(room);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -326,9 +483,15 @@ public class MainController extends Application {
                 RoomController room = goThroughDoor3Helper();
                 if (room == null) {
                     try {
-                        goToFinalScreen();
+                        goToChallengeRoom(null);
                     } catch (Exception exception) {
                         exception.printStackTrace();
+                    }
+                } else if (gameModel.getMaze().getSize() == 5) {
+                    try {
+                        goToChallengeRoom(room);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -348,9 +511,15 @@ public class MainController extends Application {
                 RoomController room = goThroughDoor4Helper();
                 if (room == null) {
                     try {
-                        goToFinalScreen();
+                        goToChallengeRoom(null);
                     } catch (Exception exception) {
                         exception.printStackTrace();
+                    }
+                } else if (gameModel.getMaze().getSize() == 5) {
+                    try {
+                        goToChallengeRoom(room);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 } else {
                     try {
@@ -359,6 +528,57 @@ public class MainController extends Application {
                         exception.printStackTrace();
                     }
                 }
+            }
+        };
+    }
+
+    private EventHandler<ActionEvent> challengeAttackHelper(ChallengeRoomController room, int snake) {
+        return new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                int attack = gameModel.getAttackValue();
+                if (gameModel.getAttackPotionActive() > 0) {
+                    attack += 5;
+                    gameModel.decrementAttackPotion();
+                }
+
+                if (snake == 1) {
+                    room.dealDamage(attack, 1);
+                    if (room.getSnake1Health() <= 0) {
+                        room.getSnakePane().getChildren().remove(room.getSnake1());
+                        room.setSnake1Dead();
+                        gameModel.addKill();
+                    }
+                } else if (snake == 2) {
+                    room.dealDamage(attack, 2);
+                    if (room.getSnake2Health() <= 0) {
+                        room.getSnakePane().getChildren().remove(room.getSnake2());
+                        room.setSnake2Dead();
+                        gameModel.addKill();
+                    }
+                } else if (snake == 3) {
+                    room.dealDamage(attack, 3);
+                    if (room.getSnake3Health() <= 0) {
+                        room.getSnakePane().getChildren().remove(room.getSnake3());
+                        room.setSnake3Dead();
+                        gameModel.addKill();
+                    }
+                } else if (snake == 4) {
+                    room.dealDamage(attack, 4);
+                    if (room.getSnake4Health() <= 0) {
+                        room.getSnakePane().getChildren().remove(room.getSnake4());
+                        room.setSnake4Dead();
+                        gameModel.addKill();
+                    }
+                }
+                int damage = 1;
+                if (gameModel.getArmorActive() > 0) {
+                    damage = 0;
+                    gameModel.decrementArmor();
+                }
+                gameModel.addAttackDealt(attack);
+                Text health = room.getEnterHealth();
+                health.setText(gameModel.dealDamage(damage) + " Health");
             }
         };
     }
@@ -420,13 +640,6 @@ public class MainController extends Application {
         }
         return spaces != name.length() && name != null
                 && !name.isEmpty() && !weaponSelected.get().isEmpty();
-    }
-
-    private void goToFinalScreen() throws Exception {
-        Scene scene = new
-                Scene(FXMLLoader.load(getClass().getResource("/game/screens/EndScreen.fxml")));
-        mainWindow.setScene(scene);
-        mainWindow.show();
     }
 
     private RoomController goThroughDoor1Helper() {
@@ -504,8 +717,26 @@ public class MainController extends Application {
             gameModel.decrementAttackPotion();
         }
         room.dealDamage(attack);
+        gameModel.addAttackDealt(attack);
         Text health = room.getEnterHealth();
         int damage = 1;
+        if (gameModel.getArmorActive() > 0) {
+            damage = 0;
+            gameModel.decrementArmor();
+        }
+        health.setText(gameModel.dealDamage(damage) + " Health");
+    }
+
+    private void attackFinalBossHelper(FinalBossController room) {
+        int attack = gameModel.getAttackValue();
+        if (gameModel.getAttackPotionActive() > 0) {
+            attack += 5;
+            gameModel.decrementAttackPotion();
+        }
+        room.dealDamage(attack);
+        gameModel.addAttackDealt(attack);
+        Text health = room.getEnterHealth();
+        int damage = 3;
         if (gameModel.getArmorActive() > 0) {
             damage = 0;
             gameModel.decrementArmor();

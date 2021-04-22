@@ -19,6 +19,8 @@ public class GameModel {
     private int attackPotionActive;
     private int armorActive;
     private ArrayList<String> inventoryString;
+    private int attackDealt;
+    private int snakesKilled;
 
     public GameModel() {
 
@@ -33,7 +35,25 @@ public class GameModel {
         this.maze = null;
         this.health = health;
         this.inventoryString = new ArrayList<>(Arrays.asList(startingWeapon));
+        this.attackDealt = 0;
+        this.snakesKilled = 0;
         initAttackValues(startingWeapon);
+    }
+
+    public void addKill() {
+        this.snakesKilled += 1;
+    }
+
+    public int getKills() {
+        return this.snakesKilled;
+    }
+
+    public void addAttackDealt(int damage) {
+        this.attackDealt += damage;
+    }
+
+    public int getAttackDealt() {
+        return this.attackDealt;
     }
 
     public ArrayList<String> getInventoryString() {
