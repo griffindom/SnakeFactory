@@ -63,7 +63,8 @@ public class ChallengeRoomController {
     public ChallengeRoomController(int width, int height) throws IOException {
         this.width = width;
         this.height = height;
-        this.scene = new Scene(FXMLLoader.load(getClass().getResource("/game/screens/ChallengeRoom.fxml")));
+        this.scene = new Scene(FXMLLoader.load(
+                getClass().getResource("/game/screens/ChallengeRoom.fxml")));
         this.enterGold = (Text) scene.lookup("#enterGold");
         this.accept = (Button) scene.lookup("#accept");
         this.decline = (Button) scene.lookup("#decline");
@@ -109,7 +110,9 @@ public class ChallengeRoomController {
         return snake1Dead && snake2Dead && snake3Dead && snake4Dead;
     }
 
-    public Button getDoor() { return this.door; }
+    public Button getDoor() {
+        return this.door;
+    }
 
     public Text getEnterGold() {
         return this.enterGold;

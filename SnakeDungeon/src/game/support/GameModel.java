@@ -5,6 +5,8 @@ import game.controllers.RoomController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.time.Duration;
+import java.time.LocalTime;
 
 public class GameModel {
 
@@ -21,6 +23,7 @@ public class GameModel {
     private ArrayList<String> inventoryString;
     private int attackDealt;
     private int snakesKilled;
+    private LocalTime beginTime;
 
     public GameModel() {
 
@@ -37,6 +40,7 @@ public class GameModel {
         this.inventoryString = new ArrayList<>(Arrays.asList(startingWeapon));
         this.attackDealt = 0;
         this.snakesKilled = 0;
+        this.beginTime = LocalTime.now();
         initAttackValues(startingWeapon);
     }
 
@@ -46,6 +50,12 @@ public class GameModel {
 
     public int getKills() {
         return this.snakesKilled;
+    }
+
+    public Duration getTotalTime() {
+        LocalTime newTime = LocalTime.now();
+        Duration duration = Duration.between(beginTime, newTime);
+        return duration;
     }
 
     public void addAttackDealt(int damage) {

@@ -5,9 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import java.time.Duration;
 
 import java.io.IOException;
 
@@ -15,6 +14,8 @@ public class EndGameController {
 
     @FXML
     private Button restart;
+    @FXML
+    private Button quit;
     @FXML
     private Text congratsText;
     @FXML
@@ -29,8 +30,10 @@ public class EndGameController {
     private Scene scene;
 
     public EndGameController() throws IOException {
-        this.scene = new Scene(FXMLLoader.load(getClass().getResource("/game/screens/EndScreen.fxml")));
+        this.scene = new Scene(FXMLLoader.load(
+                getClass().getResource("/game/screens/EndScreen.fxml")));
         this.restart = (Button) scene.lookup("#restart");
+        this.quit = (Button) scene.lookup("#quit");
         this.congratsText = (Text) scene.lookup("#congratsText");
         this.messageText = (Text) scene.lookup("#messageText");
         this.timeText = (Text) scene.lookup("#timeText");
@@ -47,7 +50,10 @@ public class EndGameController {
     }
 
     public void setTimeText(GameModel game) {
-        String message = "Total time: " + 999 + " seconds";
+        Duration duration = game.getTotalTime();
+        int min = (int) (duration.getSeconds() / 60);
+        int sec = (int) (duration.getSeconds() % 60);
+        String message = "Total time: " + min + ":" + sec;
         this.timeText.setText(message);
     }
 
@@ -69,4 +75,7 @@ public class EndGameController {
         return this.restart;
     }
 
+    public Button getQuit() {
+        return this.quit;
+    }
 }
