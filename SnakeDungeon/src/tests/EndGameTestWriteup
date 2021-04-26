@@ -4,6 +4,8 @@ Sydney Hahn:
 
 William McLanahan:
 
-James Sherman:
+James Sherman: I wrote testChallengeNoRetreat() and testChallengeMultEnemies(). The first test
+tests to make sure you cannot retreat from a challenge room. The second test tests to see that multiple
+enemies spawn in a challenge room. 
 
 Jasper Pilkenton:
