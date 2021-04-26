@@ -379,7 +379,33 @@ public class EndGameTest extends ApplicationTest {
         }
         clickOn("#door");
     }
-
+    
+    @Test
+    public void testDeath() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("Not empty");
+        drag("#difficultySlider");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        while (gameModel.getHealth() > 0) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null && gameModel.getHealth() > 0) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            if (gameModel.getHealth() > 0) {
+                clickOn("#door1");
+            }
+        }
+        clickOn("#restart");
+    }
+    
     @Test
     public void testRestartAfterGameOver() throws Exception {
         clickOn("#startButton");
