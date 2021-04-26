@@ -7,17 +7,13 @@ import game.controllers.RoomController;
 import game.support.GameModel;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import org.junit.Test;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.testfx.framework.junit.ApplicationTest;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.testfx.matcher.base.NodeMatchers;
 
 import static org.junit.Assert.*;
+import static org.testfx.api.FxAssert.verifyThat;
 
 public class EndGameTest extends ApplicationTest {
 
@@ -452,4 +448,77 @@ public class EndGameTest extends ApplicationTest {
         clickOn("#door");
         clickOn("#restart");
     }
+
+    @Test
+    public void testEndGame() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testEndGame");
+        clickOn("#longSwordButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        for (int i = 0; i < 3; i++) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            GameModel gameModel = controller.getGameModel();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            clickOn("#door1");
+        }
+        clickOn("#decline");
+        for (int i = 0; i < 6; i++) {
+            RoomController room2 = controller.getGameModel().getMaze().getTail().getData();
+            GameModel gameModel2 = controller.getGameModel();
+            Scene scene2 = room2.getScene();
+            Button snake = (Button) scene2.lookup("#snake");
+            while (snake != null) {
+                clickOn("#snake");
+                snake = (Button) scene2.lookup("#snake");
+            }
+            clickOn("#door1");
+        }
+        clickOn("#decline");
+        FinalBossController finalBossController = new FinalBossController(500, 500);
+        Scene fscene = finalBossController.getScene();
+        Button bossSnake = (Button) finalBossController.getSnake();
+        boolean ffound = false;
+        while (!ffound) {
+            try {
+                clickOn("#snake");
+            } catch (Exception e) {
+                ffound = true;
+            }
+        }
+        clickOn("#door");
+    }
+
+    @Test
+    public void testDeathPopUp() throws Exception {
+        clickOn("#startButton");
+        clickOn("#farmerName");
+        write("testDeathPopUp");
+        drag("#difficultySlider");
+        clickOn("#daggerButton");
+        clickOn("#daggerButton");
+        clickOn("#begin");
+        clickOn("#door1");
+        GameModel gameModel = controller.getGameModel();
+        while (gameModel.getHealth() > 0) {
+            RoomController room = controller.getGameModel().getMaze().getTail().getData();
+            Scene scene = room.getScene();
+            Button snake = (Button) scene.lookup("#snake");
+            while (snake != null && gameModel.getHealth() > 0) {
+                clickOn("#snake");
+                snake = (Button) scene.lookup("#snake");
+            }
+            if (gameModel.getHealth() > 0) {
+                clickOn("#door1");
+            }
+        }
+        verifyThat("You have failed to escape the Snake Dungeon!", NodeMatchers.isNotNull());
+    }
+
 }

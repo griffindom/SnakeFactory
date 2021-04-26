@@ -748,6 +748,10 @@ public class MainController extends Application {
         health.setText(gameModel.dealDamage(damage) + " Health");
     }
 
+    public Stage getMainWindow() {
+        return this.mainWindow;
+    }
+
     private void consumeHealthPotion(Menu inventory, MenuItem potion) {
         RoomController roomController = getGameModel().getMaze().getTail().getData();
         int currentHealth = gameModel.getHealth();
