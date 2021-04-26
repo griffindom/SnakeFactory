@@ -5,11 +5,14 @@ Sydney Hahn: I wrote 2 tests, testDeclineChallenge() and testMultChallengeRoom()
 when you decline a challenge upon entering a challenge room. The second one tests that the player encounters at least 2
 challenge rooms during the game.
 
-William McLanahan: I wrote 2 tests, one that ensured that there was a death screen when a snake defeats you in batlle. The other test I
-did was making sure that the challenge room gave you a choice before you fight in it.
+William McLanahan: I wrote 2 tests, testBeatGame() ensured that the player can play the game from start to finish without
+encountering any errors. The other test I wrote was testDeath() which verifies that when a player's health 
+reaches 0 the player dies and is able to restart.  
 
 James Sherman: I wrote testChallengeNoRetreat() and testChallengeMultEnemies(). The first test
 tests to make sure you cannot retreat from a challenge room. The second test tests to see that multiple
 enemies spawn in a challenge room. 
 
-Jasper Pilkenton:
+Jasper Pilkenton: I wrote testChallengeReward() and testRestartAfterGameOver(), the first of which checks to see if the player 
+is awarded full health after beating the challenge room. The second test verifies that once a player beats the game they can 
+choose to restart while still in game (AKA they do not have to re-launch the game to play again) 
