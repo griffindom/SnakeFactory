@@ -1,6 +1,8 @@
 Griffin Dominguez:
 
-Sydney Hahn:
+Sydney Hahn: I wrote 2 tests, testDeclineChallenge() and testMultChallengeRoom(). The first one tests what happens 
+when you decline a challenge upon entering a challenge room. The second one tests that the player encounters at least 2
+challenge rooms during the game.
 
 William McLanahan: I wrote 2 tests, one that ensured that there was a death screen when a snake defeats you in batlle. The other test I
 did was making sure that the challenge room gave you a choice before you fight in it.
