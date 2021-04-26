@@ -2,7 +2,8 @@ Griffin Dominguez:
 
 Sydney Hahn:
 
-William McLanahan:
+William McLanahan: I wrote 2 tests, one that ensured that there was a death screen when a snake defeats you in batlle. The other test I
+did was making sure that the challenge room gave you a choice before you fight in it.
 
 James Sherman: I wrote testChallengeNoRetreat() and testChallengeMultEnemies(). The first test
 tests to make sure you cannot retreat from a challenge room. The second test tests to see that multiple
